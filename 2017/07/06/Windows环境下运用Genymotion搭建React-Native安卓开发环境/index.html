@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、Node.js的安装；win环境下的安装还是挺傻瓜式的，所以只要把安装文件下载下来，安装就可以正常使用了，建议安装最新版的node；官方文档中用了Chocolatey，它是一个Windows上的包管理器，可以像Linux系统一样直接命令行安装比如node、Python之类的包。这里我利用他来安装了Python2[为啥又是2呢:)]，貌似没啥用，可能后期会用到。Chocolatey的安装也很简单">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows环境下运用Genymotion搭建React Native安卓开发环境">
+<meta property="og:url" content="http://lcina.github.io/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="1、Node.js的安装；win环境下的安装还是挺傻瓜式的，所以只要把安装文件下载下来，安装就可以正常使用了，建议安装最新版的node；官方文档中用了Chocolatey，它是一个Windows上的包管理器，可以像Linux系统一样直接命令行安装比如node、Python之类的包。这里我利用他来安装了Python2[为啥又是2呢:)]，貌似没啥用，可能后期会用到。Chocolatey的安装也很简单">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://lcina.github.io/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/203.png">
+<meta property="og:updated_time" content="2018-03-13T07:10:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows环境下运用Genymotion搭建React Native安卓开发环境">
+<meta name="twitter:description" content="1、Node.js的安装；win环境下的安装还是挺傻瓜式的，所以只要把安装文件下载下来，安装就可以正常使用了，建议安装最新版的node；官方文档中用了Chocolatey，它是一个Windows上的包管理器，可以像Linux系统一样直接命令行安装比如node、Python之类的包。这里我利用他来安装了Python2[为啥又是2呢:)]，貌似没啥用，可能后期会用到。Chocolatey的安装也很简单">
+<meta name="twitter:image" content="http://lcina.github.io/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/203.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/"/>
+
+
+
+
+
+  <title>Windows环境下运用Genymotion搭建React Native安卓开发环境 | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Windows环境下运用Genymotion搭建React Native安卓开发环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T15:50:01+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1、Node.js的安装；win环境下的安装还是挺傻瓜式的，所以只要把安装文件下载下来，安装就可以正常使用了，建议安装最新版的node；官方文档中用了<code>Chocolatey</code>，它是一个Windows上的包管理器，可以像Linux系统一样直接命令行安装比如node、Python之类的包。这里我利用他来安装了Python2[为啥又是2呢:)]，貌似没啥用，可能后期会用到。<code>Chocolatey</code>的安装也很简单，打开cmd命令行，输入如下命令回车即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@&quot;%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -Command &quot;iex ((New-Object System.Net.WebClient).DownloadString(&apos;https://chocolatey.org/install.ps1&apos;))&quot; &amp;&amp; SET &quot;PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin&quot;</span><br></pre></td></tr></table></figure></p>
+<p>2、可以安装yarn，当然可以选择npm而无视它，这里我还是比较习惯用npm，不过yarn也安装了，直接利用npm全局安装就可以使用了；<a id="more"></a><br>3、React Native依赖于Android SDK以及模拟器，所以需要下载Android Studio[以下简称“AS”]。其实折腾了挺久发现没必要一定要安装AS那么重的应用，当然是对于前端开发来说，所以只需要下载安卓的sdk就可以了，至于怎么下载，自行搜索。为啥不用AS的模拟器，原因很简单，非常卡，所以这里用了官网推荐使用的Genymotion模拟器，很不明白有这样这么神奇，性能好的模拟器，前面还要介绍那么多怎么安装AS，表示没搞懂，可能各有所需吧。下载安装完Genymotion后，打开软件，点击添加一个模拟器，如图所示。选择自己想要的版本号，型号等，然后双击选中，一路next下来，等待下载[过程很久]，然后基本就搞定了，最后启动它。<br><img src="/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/203.png" alt="Genymotion截图"><br>4、安装react-native-cli命令行工具，用来初始化一个react native项目，直接利用npm全局安装即可，安装完毕后，初始化一个简单的项目，命名为<code>My-RN-Project</code>，切换到该文件夹下，打开命令行启动react-native，所有的命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br><span class="line">react-native init My-RN-Project</span><br><span class="line">cd My-RN-Project</span><br><span class="line">react-native run-android</span><br></pre></td></tr></table></figure></p>
+<p>5、run-android后，第一次要下载很多文件，过程非常漫长，第二次就会快非常多了，然后我很期待的以为可以看到效果了，果然就被打脸，报了个错误<code>[Could not install the app on the device, read the error above for details.]</code>，然后看了一下输出的信息，发现找不到Java jdk中的<code>tools.jar[Execution failed for task ‘:app:compileDebugJavaWithJavac’.]</code>，看了一下自己的Java环境，发现只安装了jre，jdk并没有安装好，随后下载安装完jdk，并且配置完环境变量后，重启run了一下，发现没问题了，只是屏幕变红，应该是程序出错了，不过至少模拟器跑起来了，后面遇到啥问题，有输出错误信息就好解决了。<br>6、以上就是Windows环境下运用Genymotion搭建React Native安卓开发环境。<br>7、参考文档：<br><a href="https://facebook.github.io/react-native/docs/getting-started.html" target="_blank" rel="noopener">https://facebook.github.io/react-native/docs/getting-started.html</a> React Native官方文档<br><a href="http://reactnative.cn/docs/0.45/getting-started.html#content" target="_blank" rel="noopener">http://reactnative.cn/docs/0.45/getting-started.html#content</a> React Native中文文档<br><a href="http://www.codesec.net/view/498223.html" target="_blank" rel="noopener">http://www.codesec.net/view/498223.html</a>  windows+genymotion搭建react-native安卓开发环境</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/JavaScript：闭包/" rel="next" title="JavaScript：闭包">
+                <i class="fa fa-chevron-left"></i> JavaScript：闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/22/深入理解Javascript中的原型和闭包/" rel="prev" title="深入理解Javascript中的原型和闭包">
+                深入理解Javascript中的原型和闭包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

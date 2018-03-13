@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="LHS和RHS的含义是“赋值操作的左侧或右侧”并不一定意味着就是“=赋值操作符的左侧 或右侧”。赋值操作还有其他几种形式，因此在概念上最好将其理解为“赋值操作的目标是谁 （LHS）”以及“谁是赋值操作的源头（RHS）”。——《你不知道的JavaScript》1234function foo(a) &amp;#123;  console.log(a); &amp;#125;foo(2); //2 对书中的例子进行简">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript的两种查询方式——LHS &amp; RHS">
+<meta property="og:url" content="http://lcina.github.io/2017/03/21/JavaScript的两种查询方式——LHS-RHS/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="LHS和RHS的含义是“赋值操作的左侧或右侧”并不一定意味着就是“=赋值操作符的左侧 或右侧”。赋值操作还有其他几种形式，因此在概念上最好将其理解为“赋值操作的目标是谁 （LHS）”以及“谁是赋值操作的源头（RHS）”。——《你不知道的JavaScript》1234function foo(a) &amp;#123;  console.log(a); &amp;#125;foo(2); //2 对书中的例子进行简">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T06:28:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript的两种查询方式——LHS &amp; RHS">
+<meta name="twitter:description" content="LHS和RHS的含义是“赋值操作的左侧或右侧”并不一定意味着就是“=赋值操作符的左侧 或右侧”。赋值操作还有其他几种形式，因此在概念上最好将其理解为“赋值操作的目标是谁 （LHS）”以及“谁是赋值操作的源头（RHS）”。——《你不知道的JavaScript》1234function foo(a) &amp;#123;  console.log(a); &amp;#125;foo(2); //2 对书中的例子进行简">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/03/21/JavaScript的两种查询方式——LHS-RHS/"/>
+
+
+
+
+
+  <title>JavaScript的两种查询方式——LHS & RHS | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/03/21/JavaScript的两种查询方式——LHS-RHS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript的两种查询方式——LHS & RHS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T16:22:03+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>LHS</code>和<code>RHS</code>的含义是“赋值操作的左侧或右侧”并不一定意味着就是“=赋值操作符的左侧 或右侧”。赋值操作还有其他几种形式，因此在概念上最好将其理解为“赋值操作的目标是谁 （<code>LHS</code>）”以及“谁是赋值操作的源头（<code>RHS</code>）”。——《你不知道的JavaScript》<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a); </span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">2</span>); <span class="comment">//2</span></span><br></pre></td></tr></table></figure></p>
+<p>对书中的例子进行简单的分析，<code>foo(a)</code>是一个方法，当被调用后，控制台将会输出a的值。<code>foo(2)</code>调用该方法，其中将2赋值给了参数a，这里就用到了LHS查询；<code>foo(2)</code>调用了<code>foo(a)</code>这个方法，这样可以获得控制台输出值，这里用到了<code>RHS</code>查询[一般认为当能被调用成功，即为<code>RHS</code>，如果不存在被调用的方法，控制台将会报错！]。进入<code>foo(a)</code>这个方法体里面，发现<code>console.log(a)</code>需要在控制台输出a的值，这样就要利用<code>RHS</code>查询，找到谁是赋值操作的源头，也就是值为2。注意[自己也忽略这一点]：<code>console.log( )</code>调用的方法log，console也对其做了<code>RHS</code>查询，并且检查得到的值中是否有一个叫做log的方法。<a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">引擎：我说作用域，我需要为foo进行RHS引用。你见过它吗？</span><br><span class="line">作用域：别说，我还真见过，编译器那小子刚刚声明了它。它是一个函数，给你。</span><br><span class="line">引擎：哥们太够意思了！好吧，我来执行一下foo。</span><br><span class="line">引擎：作用域，还有个事儿。我需要为a进行LHS引用，这个你见过吗？</span><br><span class="line">作用域：这个也见过，编译器最近把它声名为foo的一个形式参数了，拿去吧。</span><br><span class="line">引擎：大恩不言谢，你总是这么棒。现在我要把2赋值给a。</span><br><span class="line">引擎：哥们，不好意思又来打扰你。我要为console进行RHS引用，你见过它吗？</span><br><span class="line">作用域：咱俩谁跟谁啊，再说我就是干这个的。这个我也有，console是个内置对象。给你。</span><br><span class="line">引擎：么么哒。我得看看这里面是不是有log(..)。太好了，找到了，是一个函数。</span><br><span class="line">引擎：哥们，能帮我再找一下对a的RHS引用吗？虽然我记得它，但想再确认一次。</span><br><span class="line">作用域：放心吧，这个变量没有变动过，拿走，不谢。</span><br><span class="line">引擎：真棒。我来把a的值，也就是2，传递进log(..)。</span><br><span class="line">……</span><br><span class="line">——《你不知道的JavaScript》</span><br></pre></td></tr></table></figure></p>
+<p>书中有一个小测验，自己也理解了一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> b = a;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = foo( <span class="number">2</span> );</span><br><span class="line"><span class="comment">//1. 找到其中所有的LHS查询。（这里有3处！） 2.找到其中所有的RHS查询。（这里有4处！）</span></span><br></pre></td></tr></table></figure></p>
+<p> 例子存在一个方法<code>foo(a)</code>，用来返回<code>a+b</code>的值，其中参数a的值由调用方法中赋予的值决定，b的值由a值赋予。语句<code>var c = foo(2)</code>中，<code>foo(2)</code>利用<code>RHS</code>查询找到是否存在<code>foo(a)</code>方法，那确实是存在的，其中将2的值赋值给了a，这里用到LHS查询。进入方法体内，语句<code>var b = a</code>中，想要得到b的值，需要先得到a的值，这时利用<code>RHS</code>查询，得到a的值为2，在通过<code>LHS</code>查询，将2赋值给了b；语句<code>return a+b</code>中，要找到a、b中谁是赋值操作的源头，即利用<code>RHS</code>查询，发现2是赋值操作的源头，这里就用了两次<code>RHS</code>查询。跳出方法体后，将返回的值赋值给c，这里用到<code>LHS</code>查询，至此，所有查询都已完毕。书中给出的答案：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 找出所有的LHS查询（这里有3处！）</span></span><br><span class="line">c = ..;、a = <span class="number">2</span>（隐式变量分配）、b = ..</span><br><span class="line"><span class="comment">//2. 找出所有的RHS查询（这里有4处！）</span></span><br><span class="line">foo(<span class="number">2.</span>.、= a;、a ..、.. b</span><br></pre></td></tr></table></figure></p>
+<p><code>LHS</code>和<code>RHS</code>查询都会在当前执行作用域中开始，如果有需要（也就是说它们没有找到所需的标识符），就会向上级作用域继续查找目标标识符，这样每次上升一级作用域（一层楼），最后抵达全局 作用域（顶层），无论找到或没找到都将停止。 不成功的RHS引用会导致抛出<code>ReferenceError</code>异常。不成功的<code>LHS</code>引用会导致自动隐式地创建一个全局变量（非严格模式下），该变量使用<code>LHS</code>引用的目标作为标识符，或者抛出<code>ReferenceError</code>异常 （严格模式下）。——《你不知道的JavaScript》</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/09/基于koa框架写后端接口/" rel="next" title="基于koa框架写后端接口">
+                <i class="fa fa-chevron-left"></i> 基于koa框架写后端接口
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/22/JavaScript之声明提升/" rel="prev" title="JavaScript之声明提升">
+                JavaScript之声明提升 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

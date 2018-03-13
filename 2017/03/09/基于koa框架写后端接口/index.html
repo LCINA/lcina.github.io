@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="服务端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。 现在主要还是做前端工作，不过这阵子基本都在学习Node这">
+<meta name="keywords" content="服务端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于koa框架写后端接口">
+<meta property="og:url" content="http://lcina.github.io/2017/03/09/基于koa框架写后端接口/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。 现在主要还是做前端工作，不过这阵子基本都在学习Node这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T06:20:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于koa框架写后端接口">
+<meta name="twitter:description" content="koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。 现在主要还是做前端工作，不过这阵子基本都在学习Node这">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/03/09/基于koa框架写后端接口/"/>
+
+
+
+
+
+  <title>基于koa框架写后端接口 | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/03/09/基于koa框架写后端接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于koa框架写后端接口</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T14:14:50+08:00">
+                2017-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://koajs.com/" target="_blank" rel="noopener">koa</a> 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。</p>
+<p>现在主要还是做前端工作，不过这阵子基本都在学习Node这一块的知识，发现Node的官方文档确实很“精简”，不过还是可以克服，不行就谷歌百度嘛！这周用koa2框架写了一个简单的Feedback接口，其实花了一下午时间（手动滑稽，在这期间被后端工程师叼了很多次，都怪自己还是不够细心，一些问题上总是出现很傻瓜式的错误，还有切记不要做伸手党，不懂就查文档，搜索，不要一遇到问题就寻求别人助攻。接下来进入正题。</p>
+<p>反馈功能，首先肯定要有数据库存储数据，这里用mysql，安装mysql，教程自行百度；node环境也是必须的，毕竟koa是基于nodejs的，这里系统环境还是推荐使用Linux，用起来特别爽，以上步骤准备完毕后，用npm安装mysql驱动:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mysql --save</span><br></pre></td></tr></table></figure></p>
+<p>–save只是用来将库存储到package.json文件中，这样别人拉你项目后，只要该文件有的库，直接npm install就OK了，没有该文件要记得创建。新建一个文件夹，名叫model，创建feedback.js文件，引用mysql库:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const mysql = require(&apos;mysql&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>创建类Feedback，这里会用到一些es7语法，不过还是能理解的，用来解决异步同步问题，首先要连接数据库，当然要先自己创建database，新建数据表，然后保存，这里表的结构大概是：id[自增]，email，feedback，createTime；这个结构自己创建，不懂怎么弄自行找方法解决。<a id="more"></a></p>
+<p>创建class Feedback{…}类后，添加constructor(){…}方法，里面用来连接数据库，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">this.connection = mysql.createConnection(&#123;</span><br><span class="line">  host: &apos;localhost&apos;,</span><br><span class="line">  user: &apos;root&apos;,</span><br><span class="line">  password: &apos;&apos;,</span><br><span class="line">  database: &apos;your database name&apos;,</span><br><span class="line">  port: &apos;8088&apos;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以用来连接到数据库了，接下来就查询数据库中的内容，然后通过网页进行反问，这里用异步方法，添加async list(){…}，用来查询数据库内容，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">return new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">  this.connection.query(&apos;select * from feedback_content&apos;,</span><br><span class="line">     (error,results,fields)=&gt; &#123;</span><br><span class="line">       if(error) &#123;reject();&#125;</span><br><span class="line">       resolve(results);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以通过路由进行访问，展示数据库中的数据了，创建文件夹routes，创建文件feedback.js，同样定义类Feedback，这里这些文件命名自己定义就好了，接着引入models/feeback，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const FeedbackModel = require(&apos;../models/feedback&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>创建async list(ctx){…}方法，调用model/feedback中的list方法，将查询到的数据展示到页面，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let rs = await FeedbackModel.list();</span><br><span class="line">ctx.body = rs;</span><br></pre></td></tr></table></figure></p>
+<p>其中里面的await要加上去，获取到results，然后将内容展示到body中，两个feedback.js文件都要创建好对象然后暴露出去，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module.exports = new Feedback();</span><br></pre></td></tr></table></figure></p>
+<p>接着当然是创建服务器去访问页面，看到数据库内容，在项目根目录创建app.js文件，这里要引入几个库，包括koa，koa-bodyParse，koa-router，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const koa = require(&apos;koa&apos;);</span><br><span class="line">const bodyParse = require(&apos;koa-bodyParse&apos;);</span><br><span class="line">const router = require(&apos;koa-router&apos;)(&#123;</span><br><span class="line">  prefix: &apos;/feedback&apos;</span><br><span class="line">&#125;);</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line">const APP_PATH = __dirname;</span><br><span class="line">const ROUTE_PATH = path.join(APP_PATH,&apos;/routes&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>上述引用都引用完无误后，基本就快大功告成了，其中koa-bodyParse是用来解析http请求的，这个express框架也有这种库，koa-router那就是用来当路由使用的，比如你想跳转到哪个页面显示哪样的数据，路由帮你搞定，react中路由就可以用来渲染不同组件内容，然后还是不懂可以上github搜一下这几个玩意，看看文档应该能理解。接下来简单了，利用路由，展示routes/feedback中数据库的内容，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.use(bodyParse());</span><br><span class="line">router.get(&apos;/&apos;,FeedbackRoute.list);</span><br><span class="line">app.use(router.routes())</span><br><span class="line">.use(router.allowedMethods());</span><br><span class="line">app.listen(3001);</span><br></pre></td></tr></table></figure></p>
+<p>以上步骤完成后，打开命令行，键入node app.js，浏览器输入localhost:3001/feedback，就可以访问到数据库的内容了，如果报错了，自己控制台看看错误原因，自己调试一下。以上就完成了从创建数据库，利用驱动访问数据库获取数据，利用koa框架以及路由完成了数据在页面中的展示。</p>
+<p>接下来就是来写接口了，前端可以通过ajax对接口进行调用，在models/feedback文件中添加async insertText(email, feedback){…}，同样是异步方法，用来往数据库中插入数据，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">return new Promise((resolve,reject)=&gt;&#123;</span><br><span class="line">  let content = &#123;</span><br><span class="line">    eamil: eamil,</span><br><span class="line">    feedback: feedbacak</span><br><span class="line">  &#125;</span><br><span class="line">  this.connection.query(insert into feedback_content set ?, content,</span><br><span class="line">    (error,results,fields)=&gt;&#123;</span><br><span class="line">      if(error) reject();</span><br><span class="line">      resolve(&#123;success: 1&#125;); </span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这个方法就完成了往数据库中插入数据，接下来再models/feedback中同样添加async insertText(ctx){…}方法，这个方法用来获取前端传过来的数据，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let email = ctx.request.body.email;</span><br><span class="line">let feedback = ctx.request.body.feedback;</span><br><span class="line">//这里是正则匹配邮箱格式，怎么写自己脑补</span><br><span class="line">let email_rg = /.../;</span><br><span class="line">if(email_rg.test(email))&#123;</span><br><span class="line">  let isSuccess =await FeedbackModel.insertText(email,feedback);</span><br><span class="line">  ctx.body=&#123;isSuccess: 1&#125;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;ctx.body = &#123;isSuccess: 0&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上完成后，只需要添加路由就可以完成前端对接口的调用了，打开app.js文件，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.post(&apos;/&apos;,FeedbackRoute.insertText);</span><br></pre></td></tr></table></figure></p>
+<p>添加以上路由后就可以来测试接口是否可用了，可以用谷歌插件Restlet Client – DHC来对接口进行调试，打开DHC，输入127.0.0.1:3001/feedback，在body中输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  email: 123@gmail.com,</span><br><span class="line">  feedback: &apos;test&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>点击send，看看返回的结果是不是isSuccess: 1，如果是代表已经成功，可以前往看看数据库中的最新数据，地址127.0.0.1：3001/，发现数据确实多了一项，这样这个接口就是已经没什么大问题了，注意：会发现feedback你传的是中文的时候，会发现DHC可能卡死，这里分析了原因，数据库没有设置utf8，只要修改下数据库表的编码就可以正常插入了。单纯用插件对接口进行测试可能有些问题还是发现不了的，前端需要模拟一下接口调用，通过ajax进行调用，这里不细说了，当前端页面输入邮箱、反馈内容后发现控制台报错了，原因肯定就是存在跨域问题，所以接口这边就要继续完善一下，添加一个header就搞定了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">router.post(&apos;*&apos;, async(ctx, next)=&gt;&#123;</span><br><span class="line">  ctx.response.set(&apos;Access-Control-Allow-Origin&apos;, &apos;*&apos;);</span><br><span class="line">  await next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样一个接口就搞定了，同时也能方便查看数据库中的数据，按照上述步骤能成功的，恭喜；失败的，不怪我（逃。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/服务端/" rel="tag"># 服务端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/21/Node下载百度首页Logo/" rel="next" title="Node下载百度首页Logo">
+                <i class="fa fa-chevron-left"></i> Node下载百度首页Logo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/21/JavaScript的两种查询方式——LHS-RHS/" rel="prev" title="JavaScript的两种查询方式——LHS & RHS">
+                JavaScript的两种查询方式——LHS & RHS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

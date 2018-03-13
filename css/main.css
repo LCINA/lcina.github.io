@@ -1332,7 +1332,7 @@ pre .javascript .function {
   border: 1px solid #ddd;
 }
 .posts-expand .post-body .fancybox img {
-  margin: 0 auto 25px;
+  margin: 0 auto;
 }
 @media (max-width: 767px) {
   .posts-collapse {
@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cd4e66;
+  background: #d2ace8;
 }
 .links-of-blogroll {
   font-size: 13px;

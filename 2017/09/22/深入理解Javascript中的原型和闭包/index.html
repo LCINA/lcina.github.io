@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这两天看了很早前的一个原型和闭包系列，来自于深入理解Javascript中的原型和闭包系列，对里面十几篇文章做了一些记录，当然里面也有我的一些理解，但基本都是从该系列中提取的一些认为比较重要的点。  一切（引用类型）都是对象，JS引用类型包括数组、对象、null、函数、new Number(10)，他们都是对象。判断一个变量是否为对象十分简单，值类型的判断用typeof，而引用类型的判断可以用in">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解Javascript中的原型和闭包">
+<meta property="og:url" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="这两天看了很早前的一个原型和闭包系列，来自于深入理解Javascript中的原型和闭包系列，对里面十几篇文章做了一些记录，当然里面也有我的一些理解，但基本都是从该系列中提取的一些认为比较重要的点。  一切（引用类型）都是对象，JS引用类型包括数组、对象、null、函数、new Number(10)，他们都是对象。判断一个变量是否为对象十分简单，值类型的判断用typeof，而引用类型的判断可以用in">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-1.png">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-2.png">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-3.png">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-4.png">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-5.png">
+<meta property="og:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-6.png">
+<meta property="og:updated_time" content="2018-03-13T07:25:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解Javascript中的原型和闭包">
+<meta name="twitter:description" content="这两天看了很早前的一个原型和闭包系列，来自于深入理解Javascript中的原型和闭包系列，对里面十几篇文章做了一些记录，当然里面也有我的一些理解，但基本都是从该系列中提取的一些认为比较重要的点。  一切（引用类型）都是对象，JS引用类型包括数组、对象、null、函数、new Number(10)，他们都是对象。判断一个变量是否为对象十分简单，值类型的判断用typeof，而引用类型的判断可以用in">
+<meta name="twitter:image" content="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/240-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/"/>
+
+
+
+
+
+  <title>深入理解Javascript中的原型和闭包 | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/09/22/深入理解Javascript中的原型和闭包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解Javascript中的原型和闭包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T18:12:55+08:00">
+                2017-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这两天看了很早前的一个原型和闭包系列，来自于<a href="http://www.cnblogs.com/wangfupeng1988/p/4001284.html" target="_blank" rel="noopener">深入理解Javascript中的原型和闭包系列</a>，对里面十几篇文章做了一些记录，当然里面也有我的一些理解，但基本都是从该系列中提取的一些认为比较重要的点。</p>
+<ul>
+<li><p>一切（引用类型）都是对象，JS引用类型包括数组、对象、null、函数、new Number(10)，他们都是对象。判断一个变量是否为对象十分简单，值类型的判断用typeof，而引用类型的判断可以用instanceof。[其中值类型包括undefined，number，string，boolean]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> <span class="built_in">Function</span>();</span><br><span class="line"><span class="built_in">console</span>.log(fn <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象——若干属性的集合，对象里面的一切都是属性，只有属性，没有方法。方法如何表示？方法也是一种属性，它的属性表示为键值对的形式。<a id="more"></a></p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="function">(<span class="params">x</span>) =&gt;</span> &#123; alert(<span class="keyword">this</span>.a + x); &#125;,</span><br><span class="line">  c: &#123;</span><br><span class="line">    name: <span class="string">"Lcina"</span>,</span><br><span class="line">    age: <span class="number">22</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对象都是通过函数创建的。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">"Lcina"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> Test();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>&#125;; 等价于</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">obj.a = <span class="number">1</span>;</span><br><span class="line">obj.b = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">// &#123;a: 1, b: 2&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; 等价于</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>[];</span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每个函数都有一个属性叫做protopyte。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line">Fn.prototype.name = <span class="string">'Lcina'</span>;</span><br><span class="line">Fn.prototype.getYear = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">200009871</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(fn.name); <span class="comment">// Lcina</span></span><br><span class="line"><span class="built_in">console</span>.log(fn.getYear()); <span class="comment">// 200009871</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>每个对象都有一个<strong>proto</strong>属性，<strong>指向创建该对象的函数的prototype</strong>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj.__proto__);</span><br></pre></td></tr></table></figure>
+<p><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-1.png" alt=""><br><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-2.png" alt=""><br>从控制台输出可以看出<code>obj.__proto__</code>和<code>Object.prototype</code>的属性一样，即<code>obj.__proto__ === Object.prototype</code>。 <em> 上面可以看出两者属性是一样的，也就是结果为true。由控制台输出信息可以看出<code>obj.__proto__</code>的结果是一个对象，那么<code>Object.prototype</code>自然而然也是一个对象，由于每个对象都有一个<code>__proto__</code>属性，那么<code>Object.prototype</code>的<code>__proto__</code>指向哪？ </em> 其中obj是由Object创建的，所以它的<code>__proto__</code>指向<code>Object.prototype</code>。而Object.prototype确实是一个特例，它的<strong>proto</strong>`指向的是null，控制台输出可以告诉你答案。<br><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-3.png" alt=""><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;...&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br></pre></td></tr></table></figure></p>
+<p><code>f1 –&gt; f1.__proto__ &lt;=&gt; Foo.prototype(.__proto__) &lt;=&gt; Function.prototype(.__proto__) &lt;=&gt; Object.prototype</code>;<br>其中<code>f1 instanceof Function</code>的结果为false，对象是由函数创建的，f1是函数创建的一个对象，并不等同于Function。<br><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-4.png" alt=""><br>instanceof表示的就是一种继承关系，或者原型链的结构。</p>
+<ul>
+<li>Javascript中的继承是通过原型链来体现的。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line">f1.a = <span class="number">10</span>;</span><br><span class="line">Foo.prototype.a = <span class="number">100</span>;</span><br><span class="line">Foo.prototype.b = <span class="number">200</span>;</span><br><span class="line"><span class="built_in">console</span>.log(f1.a); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.b); <span class="comment">// 200</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-5.png" alt=""><br>f1由函数Foo创建得来的对象，控制台输出f1.a的值为10,是因为f1.a是f1的基本属性，f1.b是怎么得来的？从Foo.prototype得来，由于<code>f1.__proto__</code>指向<code>Foo.prototype</code>，所以f1.b的值为200。<strong>访问一个对象的属性时，先在基本属性中查找，如果没有，在沿着<strong>proto</strong>这条链向上找，这就是原型链。</strong> 实际开发应用如何区分一个属性到底是基本属性还是从原型中得到的[特别在for…in…循环中需要注意]？这里需要用到hasOwnProperty。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> item;</span><br><span class="line"><span class="keyword">for</span>(item <span class="keyword">in</span> f1) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item); <span class="comment">// a b</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">for</span>(item <span class="keyword">in</span> f1) &#123;</span><br><span class="line">  <span class="keyword">if</span>(f1.hasOwnProperty(item)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item); <span class="comment">// a</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>f1 –&gt; f1.__proto__ &lt;=&gt; Foo.prototype(.__proto__) &lt;=&gt; Function.prototype(.__proto__) &lt;=&gt; Object.prototype</code>;<br>对象f1的hasOwnProperty()方法由Object.prototype继承得来，可以看上述的指向，说明<code>Function.prototype</code>中同样继承来自Object原型中的hasOwnProperty()方法。</p>
+<ul>
+<li>执行上下文</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情况1</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line"><span class="comment">// 情况2</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="comment">// 情况3</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>针对情况3，在一句一句执行js代码之前，浏览器已经做了一些“准备工作”，其中就包括对变量的声明，但不包括赋值，所以情况3实际的执行代码步骤应该是这样：<code>var a; console.log(a); a = 10</code>;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数表达式和函数声明</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 情况1[函数声明]</span></span><br><span class="line"><span class="built_in">console</span>.log(f1); <span class="comment">// function f1() &#123;...&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 情况2[函数表达式]</span></span><br><span class="line"><span class="built_in">console</span>.log(f2); <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;...&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 总结：</span></span><br><span class="line"><span class="comment"> * 1. 变量、函数表达式——变量声明，默认赋值为undefined</span></span><br><span class="line"><span class="comment"> * 2. this——赋值</span></span><br><span class="line"><span class="comment"> * 3. 函数声明——赋值</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>this [<a href="http://www.cnblogs.com/wangfupeng1988/p/3988422.html]" target="_blank" rel="noopener">http://www.cnblogs.com/wangfupeng1988/p/3988422.html]</a></li>
+<li>作用域。JavaScript没有块级作用域。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">if</span>(i &gt; <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"Lcina"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// Lcina</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaScript除了全局作用域之外，只有函数可以创建的作用域。</span></span><br><span class="line"><span class="comment">// 在声明变量时，全局代码要在代码前面声明；</span></span><br><span class="line"><span class="comment">// 而函数中使用到的变量要在函数体一开始声明。其他地方最好不要出现变量声明。</span></span><br><span class="line"><span class="comment">// 作用域的最大用处是隔离变量，不同作用域下的同名变量不会有冲突。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123; <span class="comment">// fn1作用域</span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>) </span>&#123; <span class="comment">// fn2作用域</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// http://www.cnblogs.com/wangfupeng1988/p/3991995.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 作用域情况1</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = x;</span><br><span class="line">  <span class="built_in">console</span>.log( &#123;<span class="attr">fn</span>: a&#125; ); <span class="comment">// 10</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = x;</span><br><span class="line">    <span class="built_in">console</span>.log( &#123;<span class="attr">bar</span>: a&#125; ); <span class="comment">// 100</span></span><br><span class="line">  &#125;</span><br><span class="line">  bar(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line">fn(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 作用域情况2 </span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = x;</span><br><span class="line">  <span class="built_in">console</span>.log( &#123;<span class="attr">fn</span>: a&#125; ); <span class="comment">// 10</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = x;</span><br><span class="line">    <span class="built_in">console</span>.log( &#123;<span class="attr">bar</span>: a&#125; ); <span class="comment">// 10</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过作用域对应的执行上下文环境来获取变量的值。</span></span><br><span class="line"><span class="comment">// 作用域中变量的值是在执行过程中产生确定的，</span></span><br><span class="line"><span class="comment">// 而作用域确是在函数创建时就确定的。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// “自由变量”到“作用链”情况1</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">20</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> x = fn(),</span><br><span class="line">    b = <span class="number">200</span>;</span><br><span class="line">x(); <span class="comment">// 30</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2017/09/22/深入理解Javascript中的原型和闭包/240-6.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 要到创建这个函数的那个作用域中取值——是“创建”，而不是“调用”</span><br><span class="line">/*</span><br><span class="line">* 在A作用域中使用的变量x，却没有在A作用域中声明（即在其他作用域中声明的），对于A作用域来说，x就是一个自由变量。比如上图中的a就是一个自由变量。</span><br><span class="line">* 第一步，现在当前作用域查找a，如果有则获取并结束。如果没有则继续；</span><br><span class="line">* 第二步，如果当前作用域是全局作用域，则证明a未定义，结束；否则继续；</span><br><span class="line">* 第三步，（不是全局作用域，那就是函数作用域）将创建该函数的作用域作为当前作用域；</span><br><span class="line">* 第四步，跳转到第一步。</span><br><span class="line">* 根据上面的例子可以这样理解[作者应该估计也是这么理解的]：根据函数fn创建了对象x，调用x()，fn函数体里面可以直接看到的就是输出到控制台的内容是什么？执行函数fn的结果是返回bar，即控制台输出的a+b的值。那么函数bar()中的a的值，从当前作用域出发，最终发现不管是bar作用域还是fn作用域都没有定义，最终找到了自由变量a，所以a的值为10。那么b的值，并不存在自由变量b，所以b的值可以到创建函数bar的fn作用域获取，也就是作者提到的第三步，得到b的值为20，所以后面即使给b赋值为200，其实也没用，所以最终结果为30。如果将fn作用域中的b定义拿掉，那最终结果就有210，这里不解释了。注意：后面虽然重新定义了b的值为200，但不影响作用域中b的值，本身两者作用域都不同，也就是这两个变量半毛钱关系没有，只是两个命名的名字一样而已。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// “自由变量”到“作用链”情况2</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">20</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> x = fn(),</span><br><span class="line">    b = <span class="number">200</span>;</span><br><span class="line">x(); <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 对之前代码进行了修改，定义了自由变量b=100，执行结果仍为30。</span></span><br><span class="line"><span class="comment"> * 因为在fn作用域找到了b已经定义，所以bar作用域中的b的值来自于fn作用域，</span></span><br><span class="line"><span class="comment"> * 即b的值仍为20。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// “自由变量”到“作用链”情况3</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line">fn()(); <span class="comment">// 110</span></span><br><span class="line"><span class="keyword">var</span> x = fn(),</span><br><span class="line">    b = <span class="number">200</span>;</span><br><span class="line">x(); <span class="comment">// 210</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 这种情况发现不管是fn/bar作用域，都不存在b这个变量，</span></span><br><span class="line"><span class="comment"> * 所以就找到了自由（全局）变量b=100，但在创建对象x后，</span></span><br><span class="line"><span class="comment"> * 全局变量b被重新定义b=200，所以当x()时，最终的结果为210。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> max = <span class="number">10</span>,</span><br><span class="line">    fn = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (x &gt; max) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">f</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> max = <span class="number">100</span>;</span><br><span class="line">  f(<span class="number">15</span>);</span><br><span class="line">&#125;)(fn) <span class="comment">// 15 </span></span><br><span class="line"><span class="comment">// 这里的max为10，而不是100，注意max，fn都为变量，</span></span><br><span class="line"><span class="comment">// 那么fn被赋予的方法中的max值应该来源与自由变量max=10，</span></span><br><span class="line"><span class="comment">// 而不是(function(f)&#123;&#125;)()中的max值，具体可以参考上面的例子解释。</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/" rel="next" title="Windows环境下运用Genymotion搭建React Native安卓开发环境">
+                <i class="fa fa-chevron-left"></i> Windows环境下运用Genymotion搭建React Native安卓开发环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/13/Redux-TodoList例子解析-自己胡编乱造/" rel="prev" title="Redux TodoList例子解析[自己胡编乱造]">
+                Redux TodoList例子解析[自己胡编乱造] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

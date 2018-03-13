@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Promise 对象用于异步计算. 一个Promise对象代表一个值, 该值可以在当前或未来可用, 或永远不可用。Promise对象有以下几种状态:   pending: 初始状态, 既不是 fulfilled 也不是 rejected. fulfilled: 成功的操作. rejected: 失败的操作.   以上描述均来自于MDN对Promise基础的解释，链接地址。在看MDN对Promise">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node基础 Promise">
+<meta property="og:url" content="http://lcina.github.io/2017/02/05/Node基础-Promise/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="Promise 对象用于异步计算. 一个Promise对象代表一个值, 该值可以在当前或未来可用, 或永远不可用。Promise对象有以下几种状态:   pending: 初始状态, 既不是 fulfilled 也不是 rejected. fulfilled: 成功的操作. rejected: 失败的操作.   以上描述均来自于MDN对Promise基础的解释，链接地址。在看MDN对Promise">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T04:27:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node基础 Promise">
+<meta name="twitter:description" content="Promise 对象用于异步计算. 一个Promise对象代表一个值, 该值可以在当前或未来可用, 或永远不可用。Promise对象有以下几种状态:   pending: 初始状态, 既不是 fulfilled 也不是 rejected. fulfilled: 成功的操作. rejected: 失败的操作.   以上描述均来自于MDN对Promise基础的解释，链接地址。在看MDN对Promise">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/02/05/Node基础-Promise/"/>
+
+
+
+
+
+  <title>Node基础 Promise | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/02/05/Node基础-Promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node基础 Promise</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T12:21:59+08:00">
+                2017-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Promise 对象用于异步计算. 一个Promise对象代表一个值, 该值可以在当前或未来可用, 或永远不可用。<br>Promise对象有以下几种状态:</p>
+<blockquote>
+<ol>
+<li>pending: 初始状态, 既不是 fulfilled 也不是 rejected.</li>
+<li>fulfilled: 成功的操作.</li>
+<li>rejected: 失败的操作.</li>
+</ol>
+</blockquote>
+<p>以上描述均来自于MDN对Promise基础的解释，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">链接地址</a>。<br>在看MDN对Promise的例子中同时学到了insertAdjacentHTML()这一接口，这个接口对于在元素之间DOM的插入非常的方便，但这里只是简单的介绍下，insertAdjacentHTML() 将指定的文本解析为HTML或XML，并将生成的节点插入到指定位置的DOM树中。语法使用：<br><code>element.insertAdjacentHTML(position, text);</code><a id="more"></a><br>其中参数position是指相对于元素的位置，存在四个对应的字母串，分别是<code>beforebegin</code>[element自身的前面]，<code>afterbegin</code>[插入element内部的第一个子节点之前]，<code>beforeend</code>[插入element内部的第一个子节点之后]，<code>afterend</code>[element自身的后面]；MDN上对该API的解释地址是：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/insertAdjacentHTML" target="_blank" rel="noopener">点击跳转</a>。<br>在看了上述文档以及例子之后，自己也随手写了一个比较简单的例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"promise1"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test1"</span>&gt;</span>Promise1<span class="tag">&lt;<span class="name">b</span>&gt;</span>[id: test1]<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test2"</span>&gt;</span>Promise2<span class="tag">&lt;<span class="name">b</span>&gt;</span>[id: test2]<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test3"</span>&gt;</span>Promise3<span class="tag">&lt;<span class="name">b</span>&gt;</span>[id: test3]<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"test4"</span>&gt;</span>Promise4<span class="tag">&lt;<span class="name">b</span>&gt;</span>[id: test4]<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">promise2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'同步代码开始'</span>);</span><br><span class="line"> <span class="keyword">var</span> promise1 = <span class="built_in">document</span>.getElementById(<span class="string">'promise1'</span>);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> test1 = <span class="built_in">document</span>.getElementById(<span class="string">'test1'</span>);</span><br><span class="line"> <span class="keyword">var</span> test2 = <span class="built_in">document</span>.getElementById(<span class="string">'test2'</span>);</span><br><span class="line"> <span class="keyword">var</span> test3 = <span class="built_in">document</span>.getElementById(<span class="string">'test3'</span>);</span><br><span class="line"> <span class="keyword">var</span> test4 = <span class="built_in">document</span>.getElementById(<span class="string">'test4'</span>);</span><br><span class="line"></span><br><span class="line"> test1.insertAdjacentHTML(<span class="string">'beforebegin'</span> , <span class="string">"&lt;p id='insert1'&gt;这个元素放在id为'test1'\之前&lt;b&gt;[id: insert1]&lt;/b&gt;&lt;/p&gt;"</span>);</span><br><span class="line"> promise1.insertAdjacentHTML(<span class="string">'afterbegin'</span>, <span class="string">"&lt;p id='insert2'&gt;这个元素放在id为'inseret1'\</span></span><br><span class="line"><span class="string">之前&lt;b&gt;[id: insert2]&lt;/b&gt;&lt;/p&gt;"</span>);</span><br><span class="line"> promise1.insertAdjacentHTML(<span class="string">'beforeend'</span>, <span class="string">"&lt;p id='insert3'&gt;这个元素放在id为'test4'\ 之后&lt;b&gt;[id: insert3]&lt;/b&gt;&lt;/p&gt;"</span>);</span><br><span class="line"> test1.insertAdjacentHTML(<span class="string">'afterend'</span> , <span class="string">"&lt;p id='insert4'&gt;这个元素放在id为'test1'\之后&lt;b&gt;[id: insert4]&lt;/b&gt;&lt;/p&gt;"</span>)</span><br><span class="line"> <span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="keyword">var</span> val = <span class="literal">true</span>;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'异步代码开始'</span>);</span><br><span class="line">   <span class="built_in">window</span>.setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">     resolve(val);</span><br><span class="line">   &#125;, <span class="number">3000</span>);</span><br><span class="line"> &#125;).then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line"> test3.insertAdjacentHTML(<span class="string">'beforebegin'</span>, <span class="string">"&lt;p id='insert5'&gt;异步代码执行结果：这个元素放在id为'test3'\之前&lt;b&gt;[id: insert5]&lt;/b&gt;&lt;/p&gt;"</span>);</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'异步代码结束'</span>);</span><br><span class="line"> &#125;).catch(<span class="built_in">console</span>.log.bind(<span class="built_in">console</span>));</span><br><span class="line"> test4.insertAdjacentHTML(<span class="string">'beforebegin'</span>, <span class="string">"&lt;p id='insert6'&gt;这个元素放在id为'test4'之前\</span></span><br><span class="line"><span class="string"> &lt;b&gt;[id: insert6]&lt;/b&gt;&lt;/p&gt;"</span>);</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'同步代码结束'</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/04/React——Components-and-Props/" rel="next" title="React——Components and Props">
+                <i class="fa fa-chevron-left"></i> React——Components and Props
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/21/Node获取百度首页代码/" rel="prev" title="Node获取百度首页代码">
+                Node获取百度首页代码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

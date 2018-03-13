@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="闭包的简单理解：函数A在函数B内容进行了定义，当函数A在执行时需要访问函数B中的变量对象，那么函数B就是一个闭包。简单看一个小例子，大概就能简单理解何为闭包。12345678function foo() &amp;#123;  var a = 2;  function bar() &amp;#123;    console.log( a ); // 2  &amp;#125;  bar();&amp;#125;foo(); 对于">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript：闭包">
+<meta property="og:url" content="http://lcina.github.io/2017/03/24/JavaScript：闭包/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="闭包的简单理解：函数A在函数B内容进行了定义，当函数A在执行时需要访问函数B中的变量对象，那么函数B就是一个闭包。简单看一个小例子，大概就能简单理解何为闭包。12345678function foo() &amp;#123;  var a = 2;  function bar() &amp;#123;    console.log( a ); // 2  &amp;#125;  bar();&amp;#125;foo(); 对于">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-13T06:48:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript：闭包">
+<meta name="twitter:description" content="闭包的简单理解：函数A在函数B内容进行了定义，当函数A在执行时需要访问函数B中的变量对象，那么函数B就是一个闭包。简单看一个小例子，大概就能简单理解何为闭包。12345678function foo() &amp;#123;  var a = 2;  function bar() &amp;#123;    console.log( a ); // 2  &amp;#125;  bar();&amp;#125;foo(); 对于">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2017/03/24/JavaScript：闭包/"/>
+
+
+
+
+
+  <title>JavaScript：闭包 | Lcina的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/03/24/JavaScript：闭包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript：闭包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T19:35:58+08:00">
+                2017-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>闭包的简单理解：函数A在函数B内容进行了定义，当函数A在执行时需要访问函数B中的变量对象，那么函数B就是一个闭包。简单看一个小例子，大概就能简单理解何为闭包。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a ); <span class="comment">// 2</span></span><br><span class="line">  &#125;</span><br><span class="line">  bar();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure></p>
+<p>对于上述代码，很好理解，就是调用<code>foo()</code>方法，其中<code>bar()</code>嵌套在<code>foo()</code>中，并且<code>bar()</code>方法体中要在控制台输出a的值，而这个a的声明在<code>bar()</code>外，相对于<code>bar()</code>来说a是一个全局变量，这样进行<code>RHS</code>查询，可以得到a值为2，上面这个例子可以对闭包进行一个简单的理解，函数<code>bar()</code>在函数<code>foo()</code>内容进行了定义，当函数A在执行时需要访问函数<code>foo()</code>中的变量对象，那么函数<code>foo()</code>就是一个闭包。这个小例子其实不能突出的展示出闭包的作用，在《你不知道的JavaScript》一书中，举出了另一个例子，可以很好地展示出闭包的真正作用，清晰地展示了闭包。<a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( a );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz(); <span class="comment">// 2 ———— 朋友，这就是闭包的效果。</span></span><br></pre></td></tr></table></figure></p>
+<p>上面例子中，发现跟第一个例子区别在于bar被return了，调用<code>foo()</code>方法将他赋值给变量baz，这时候其实baz被赋予的就是<code>bar()</code>方法，而JavaScript存在垃圾回收机制，<code>foo()</code>被执行调用后，应该整个内部作用域都会被销毁，但由于<code>foo()</code>是一个闭包，所以闭包阻止了这样的事发生，因为就算自身不用了，内部函数方法<code>bar()</code>还是需要访问<code>foo()</code>中的变量对象，所以<code>foo()</code>并没有被回收。<br>闭包的常用场景之一是<code>setTimeout</code>函数。该函数可以做到延迟执行，观察下面的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'hello'</span> );</span><br><span class="line">&#125;, <span class="number">1000</span> );</span><br></pre></td></tr></table></figure></p>
+<p>上述例子理解起来很简单，就是一秒后输出字符串hello，控制台可以将此代码复制进去，看看结果，第一行出现的值是调用该函数返回的一个唯一Id。结合<code>setTimeout</code>与循环，也可以与闭包很好的联系起来，看一下下面的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i&lt;=<span class="number">5</span>; i++) &#123;</span><br><span class="line">  setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( i );</span><br><span class="line">  &#125;, i*<span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个循环例子输出结果可能有部分人认为输出结果应该是1-5，但事实是每秒输出的值都为6。其实可以通过很多种方法解决这种问题，比如闭包，但这里我简单解释一下为什么会输出的都是6？我们先简单看一下例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Demo1.js</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"setTimeout"</span>);</span><br><span class="line">&#125;,<span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"not setTimeout"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Demo2.js</span></span><br><span class="line"><span class="keyword">let</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>() - start);  </span><br><span class="line">&#125;, <span class="number">500</span>)</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">new</span> <span class="built_in">Date</span>() - start &lt;= <span class="number">1000</span>) &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于Demo1，部分人看到<code>setTimeout</code>中的延时毫秒数为0，那应该是首先输出字符串<code>setTimeout</code>，但结果肯定是相反的，因为<code>setTimeout</code>存在一个最小的执行时间，当指定时间小于最小执行时间时，默认用最小执行时间，所以就算延迟毫秒数为0，默认最小执行时间大于0，所以字符串<code>setTimeout</code>会在最后输出。对于Demo2，我第一眼看到这个例子的时候，以为输出值应该为500，但事实并不是这样的，为什么呢？因为下面有个循环判断语句，只有当当前时间与定义时间毫秒数小于等于1000时，才跳出循环，这样才轮到<code>setTimeout</code>执行里面的方法，输出结果都是比1000大的值。通过上面两个小例子，发现<code>setTimeout</code>延迟函数的执行都会等到其他函数调用栈清空后才会执行，这时候未执行的<code>setTimeout</code>函数会放在队列结构中，等到其他函数调用都结束后，<code>setTimeout</code>遵循先进先出规则，依次输出结果。所以对于刚开始的例子为什么输出结果都为6，相信应该大概知道啥回事了。就是当<code>for(…)</code>循环执行完毕后，也就是当<code>i=6</code>时，循环结束，这时候依次从队列中输出<code>setTimeout</code>输出的值，也就是5次6。<br>那应该怎样利用闭包对上述循环的例子进行改进呢？其实很简单，只要我们每次把i的值存下来就可以了，具体实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i&lt;=<span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log( j );</span><br><span class="line">    &#125;, j*<span class="number">1000</span> );</span><br><span class="line">  &#125;)( i );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i&lt;=<span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> j = i; <span class="comment">// 是的，闭包的块作用域！</span></span><br><span class="line">  setTimeout( <span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( j );</span><br><span class="line">  &#125;, j*<span class="number">1000</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>闭包的另一个强大的使用场景就是模块。《你不知道的JavaScript》一书中给出的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CoolModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> something = <span class="string">"cool"</span>;  </span><br><span class="line">  <span class="keyword">var</span> another = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( something );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">doAnother</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log( another.join( <span class="string">" ! "</span> ) );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doAnother: doAnother</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo = CoolModule();</span><br><span class="line">foo.doSomething(); <span class="comment">// cool</span></span><br><span class="line">foo.doAnother(); <span class="comment">// 1 ! 2 ! 3</span></span><br></pre></td></tr></table></figure></p>
+<p>书中引用：“模块有两个主要特征：(1)为创建内部作用域而调用了一个包装函数；(2)包装函数的返回值必须至 少包括一个对内部函数的引用，这样就会创建涵盖整个包装函数内部作用域的闭包”。<br>参考资料：<br><a href="http://www.jianshu.com/p/21a16d44f150" target="_blank" rel="noopener">详细图解作用域与闭包</a><br><a href="http://blog.csdn.net/fightingboy8888/article/details/54311156" target="_blank" rel="noopener">你应该知道的setTimeout秘密</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/22/JavaScript之声明提升/" rel="next" title="JavaScript之声明提升">
+                <i class="fa fa-chevron-left"></i> JavaScript之声明提升
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/06/Windows环境下运用Genymotion搭建React-Native安卓开发环境/" rel="prev" title="Windows环境下运用Genymotion搭建React Native安卓开发环境">
+                Windows环境下运用Genymotion搭建React Native安卓开发环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

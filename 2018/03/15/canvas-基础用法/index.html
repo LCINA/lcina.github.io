@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Lcina的博客">
 <meta property="og:description" content="Canvas简介Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自维基百科)]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T07:47:02.000Z">
+<meta property="og:updated_time" content="2018-03-19T10:25:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canvas 基础用法">
 <meta name="twitter:description" content="Canvas简介Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自维基百科)]">
@@ -385,6 +385,7 @@
 <p><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br>上面的例子包括了四种情况，分别是<br>1.不设置宽高[默认300x150]<br>2.设置canvas宽高<br>3.设置canvas初始化宽高+css设置同比例宽高<br>4.默认canvas宽高300x150+css设置宽高[200x200]<br>前两种情况没有什么特别，后两种情况，唯一的区别就是两者宽高比例是否一致，可以发现第三种情况canvas宽高和css设置的宽高比例一致，所以绘制的图形没有出现变形扭曲现象。而最后一种情况，默认canvas的宽高为300x150，与设置的css宽高200x200不一致，所以画布绘制的图形出现了变形扭曲的现象。综上，如果要用css来设置canvas的尺寸，需要跟canvas初始尺寸比例保持一致。</p>
 <h2 id="渲染上下文"><a href="#渲染上下文" class="headerlink" title="渲染上下文"></a>渲染上下文</h2><p><code>&lt;canvas&gt;</code>标签创建了一块固定大小的画布，公开了一个或多个渲染上下文，可以用来绘制和处理要展示的内容。如果要画布上绘制内容，就必须拿到canvas上下文，可以根据拿到的上下文，绘制各种图形等。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas1 = <span class="built_in">document</span>.getElementById(<span class="string">'canvas-1'</span>);</span><br><span class="line"><span class="keyword">var</span> ctx1 = canvas1.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure></p>
 <p>获取到ctx1这个上下文后，就可以调用提供的api绘制图形，如fillRect等。<br>本文主要介绍了canvas比较基础的用法，下一章会介绍如何通过canvas创建的上下文绘制各种图形。</p>
+<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage" target="_blank" rel="noopener">Canvas的基本用法</a></p>
 
       
     </div>

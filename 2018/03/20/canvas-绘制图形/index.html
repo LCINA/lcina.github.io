@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="Canvas简介Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自维基百科)]">
+<meta name="description" content="在上一篇文章中已经讲了canvas的基本用法，这一篇就开始讲讲如何通过创建的上下文绘制各种形状，如矩形等。 绘制矩形canvas只支持一种原生的图形绘制：矩形。而其他图形的绘制都需要依赖路径，canvas提供了三种方法来绘制矩形：1.fillRect(x, y, width, height) 绘制一个填充的矩形">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="canvas 基础用法">
-<meta property="og:url" content="http://lcina.github.io/2018/03/15/canvas-基础用法/index.html">
+<meta property="og:title" content="canvas 绘制图形">
+<meta property="og:url" content="http://lcina.github.io/2018/03/20/canvas-绘制图形/index.html">
 <meta property="og:site_name" content="Lcina的博客">
-<meta property="og:description" content="Canvas简介Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自维基百科)]">
+<meta property="og:description" content="在上一篇文章中已经讲了canvas的基本用法，这一篇就开始讲讲如何通过创建的上下文绘制各种形状，如矩形等。 绘制矩形canvas只支持一种原生的图形绘制：矩形。而其他图形的绘制都需要依赖路径，canvas提供了三种方法来绘制矩形：1.fillRect(x, y, width, height) 绘制一个填充的矩形">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T10:25:34.000Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fjspljhdnzj312w0hq40s.jpg">
+<meta property="og:updated_time" content="2018-03-20T06:47:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="canvas 基础用法">
-<meta name="twitter:description" content="Canvas简介Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自维基百科)]">
+<meta name="twitter:title" content="canvas 绘制图形">
+<meta name="twitter:description" content="在上一篇文章中已经讲了canvas的基本用法，这一篇就开始讲讲如何通过创建的上下文绘制各种形状，如矩形等。 绘制矩形canvas只支持一种原生的图形绘制：矩形。而其他图形的绘制都需要依赖路径，canvas提供了三种方法来绘制矩形：1.fillRect(x, y, width, height) 绘制一个填充的矩形">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fjspljhdnzj312w0hq40s.jpg">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://lcina.github.io/2018/03/15/canvas-基础用法/"/>
+  <link rel="canonical" href="http://lcina.github.io/2018/03/20/canvas-绘制图形/"/>
 
 
 
 
 
-  <title>canvas 基础用法 | Lcina的博客</title>
+  <title>canvas 绘制图形 | Lcina的博客</title>
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/03/15/canvas-基础用法/">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/03/20/canvas-绘制图形/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lcina">
@@ -260,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">canvas 基础用法</h1>
+          <h1 class="post-title" itemprop="name headline">canvas 绘制图形</h1>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T17:43:29+08:00">
-                2018-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T09:36:15+08:00">
+                2018-03-20
               </time>
             
 
@@ -290,7 +292,7 @@
 
           
           
-             <span id="/2018/03/15/canvas-基础用法/" class="leancloud_visitors" data-flag-title="canvas 基础用法">
+             <span id="/2018/03/20/canvas-绘制图形/" class="leancloud_visitors" data-flag-title="canvas 绘制图形">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -321,71 +323,90 @@
       
 
       
-        <h2 id="Canvas简介"><a href="#Canvas简介" class="headerlink" title="Canvas简介"></a>Canvas简介</h2><p>Canvas元素是HTML5的一部分，允許指令碼語言動態渲染點陣圖像。Canvas是由HTML代碼配合高度和寬度屬性而定義出的可繪製區域。JavaScript代碼可以訪問該區域，類似於其他通用的二維API，通過一套完整的繪圖函數來動態生成圖形。一些可能的用途，包括使用Canvas構造圖形，動畫，遊戲和圖片。[来自<a href="https://zh.wikipedia.org/wiki/Canvas_(HTML%E5%85%83%E7%B4%A0" target="_blank" rel="noopener">维基百科</a>)]<a id="more"></a><br>Canvas的浏览器支持情况：</p>
+        <p>在上一篇文章中已经讲了canvas的基本用法，这一篇就开始讲讲如何通过创建的上下文绘制各种形状，如矩形等。</p>
+<h2 id="绘制矩形"><a href="#绘制矩形" class="headerlink" title="绘制矩形"></a>绘制矩形</h2><p>canvas只支持一种原生的图形绘制：矩形。而其他图形的绘制都需要依赖路径，canvas提供了三种方法来绘制矩形：<br>1.<code>fillRect(x, y, width, height)</code> 绘制一个填充的矩形<a id="more"></a></p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="BrpdaL" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="BrpdaL" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/BrpdaL/" target="_blank" rel="noopener">BrpdaL</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+2.`strokeRect(x, y, width, height)` 绘制一个带边框的矩形
+<p data-height="265" data-theme-id="0" data-slug-hash="Gxrvpo" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="Gxrvpo" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/Gxrvpo/" target="_blank" rel="noopener">Gxrvpo</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+3.`clearRect(x, y, width, height)` 清除指定区域，使清除部分透明
+<p data-height="265" data-theme-id="0" data-slug-hash="bvgrwW" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="bvgrwW" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/bvgrwW/" target="_blank" rel="noopener">bvgrwW</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h2><p>Photoshop的钢笔工具，其实就是通过路径绘制比较复杂的图形，比如花朵、人物等。图形的基本元素是路径，路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合。绘制路径所需要的函数：<br><code>beginPath()</code> 新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。<br><code>closePath()</code> 闭合路径之后图形绘制命令又重新指向到上下文中。<br><code>stroke()</code> 通过线条来绘制图形轮廓。<br><code>fill()</code> 通过填充路径的内容区域生成实心的图形。</p>
+<blockquote>
+<p>当你调用fill()函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用closePath()函数。但是调用stroke()时不会自动闭合。</p>
+</blockquote>
+<h3 id="绘制三角形"><a href="#绘制三角形" class="headerlink" title="绘制三角形"></a>绘制三角形</h3><p>当canvas初始化或者beginPath()调用后，你通常会使用moveTo()函数设置起点。所以绘制三角形首先需要一个起点，通过函数<code>moveTo(x, y)</code>确定起点坐标位置。有了坐标起点，就可以通过线段绘制出三角形，通过函数<code>lineTo(x, y)</code>确定线段落点位置，这里需要设置两个落点绘制。最后通过函数<code>ctx.fill()</code>使绘制的三个点闭合，形成一个填充的三角形。如果需要绘制带边框的三角形，则通过<code>ctx.closePath(); ctx.stroke();</code>，其中<code>ctx.closePath()</code>用来闭合路径的。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="zWNdeg" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="zWNdeg" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/zWNdeg/" target="_blank" rel="noopener">zWNdeg</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="移动笔触"><a href="#移动笔触" class="headerlink" title="移动笔触"></a>移动笔触</h3><p><code>moveTo(x, y)</code> 将笔触移动到指定的坐标x以及y上。当canvas初始化或者beginPath()调用后，通常会使用moveTo()函数设置起点。</p>
+<h3 id="线"><a href="#线" class="headerlink" title="线"></a>线</h3><p><code>lineTo(x, y)</code> 绘制一条从当前位置到指定x以及y位置的直线。</p>
+<h3 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h3><p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code><br>该方法有六个参数：x,y为绘制圆弧所在圆上的圆心坐标。radius为半径。startAngle以及endAngle参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数anticlockwise为一个布尔值。为true时，是逆时针方向，否则顺时针方向。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">Internet Explorer</th>
-<th style="text-align:center">Firefox</th>
-<th style="text-align:center">Safari</th>
-<th style="text-align:center">Chrome</th>
-<th style="text-align:center">Opera</th>
-<th style="text-align:center">iOS Safari</th>
-<th style="text-align:center">Opera Mobile</th>
-<th style="text-align:center">Android Browser</th>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><del>6.0</del></td>
-<td style="text-align:center">5.1</td>
-<td style="text-align:center">3.2</td>
-<td style="text-align:center">12.0</td>
-<td style="text-align:center">10.6</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">10.0</td>
-<td style="text-align:center">2.1</td>
+<td style="text-align:center">x</td>
+<td style="text-align:center">圆心x轴坐标</td>
 </tr>
 <tr>
-<td style="text-align:center"><del>7.0</del></td>
-<td style="text-align:center">6.2</td>
-<td style="text-align:center">4.0</td>
-<td style="text-align:center">13.0</td>
-<td style="text-align:center">11.0</td>
-<td style="text-align:center">3.2</td>
-<td style="text-align:center">11.0</td>
-<td style="text-align:center">2.2</td>
+<td style="text-align:center">y</td>
+<td style="text-align:center">圆心y轴坐标</td>
 </tr>
 <tr>
-<td style="text-align:center"><del>8.0</del></td>
-<td style="text-align:center">7.1</td>
-<td style="text-align:center">5.0</td>
-<td style="text-align:center">14.0</td>
-<td style="text-align:center">11.1</td>
-<td style="text-align:center">4.0</td>
-<td style="text-align:center">11.1</td>
-<td style="text-align:center">2.3,3.0</td>
+<td style="text-align:center">radius</td>
+<td style="text-align:center">圆半径</td>
 </tr>
 <tr>
-<td style="text-align:center">9.0</td>
-<td style="text-align:center">8.0</td>
-<td style="text-align:center">5.1</td>
-<td style="text-align:center">15.0</td>
-<td style="text-align:center">11.5</td>
-<td style="text-align:center">4.2-4.3</td>
-<td style="text-align:center">11.5</td>
-<td style="text-align:center">4.0</td>
+<td style="text-align:center">startAngle</td>
+<td style="text-align:center">起始角，以弧度记</td>
+</tr>
+<tr>
+<td style="text-align:center">endAngle</td>
+<td style="text-align:center">结束角，以弧度记</td>
+</tr>
+<tr>
+<td style="text-align:center">anticlockwise</td>
+<td style="text-align:center">false[默认]：顺时针，true：逆时针</td>
 </tr>
 </tbody>
 </table>
-<p>对于不支持Canvas标签的浏览器，可以在其标签增加替换内容，比如一句话，或者一张图片。<code>&lt;/canvas&gt;</code>标签不能省略，如果结束标签不存在，<code>&lt;canvas&gt;</code>标签后的其余部分都会被认为是替换内容，导致其余部分无法正常显示。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas-1"</span> <span class="attr">width</span>=<span class="string">"200"</span> <span class="attr">height</span>=<span class="string">"200"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>浏览器不支持canvas标签<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>同时也可以依靠脚本来判定浏览器是否支持  <code>&lt;canvas&gt;</code>标签。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas1 = <span class="built_in">document</span>.getElementById(<span class="string">'canvas-1'</span>);</span><br><span class="line"><span class="keyword">if</span> (canvas1.getContext)&#123;</span><br><span class="line">  <span class="keyword">var</span> ctx1 = canvas1.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Canvas属性"><a href="#Canvas属性" class="headerlink" title="Canvas属性"></a>Canvas属性</h2><p>canvas标签只有两个属性：width和height。渲染canvas时，如果不设置固定的宽高，canvas会默认设置宽度为300px，高度为150px。虽然也可以使用css定义canvas的宽高，但是在绘制图形时可能会存在图形拉伸。比如你绘制的是一个正方形，由于通过css设置了宽高，但css的尺寸跟canvas初始画布的比例不一致，就会出现形状拉伸现象。下面用一个例子来看一下。</p>
-<p></p><p data-height="265" data-theme-id="0" data-slug-hash="rdeRjo" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="rdeRjo" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/rdeRjo/" target="_blank" rel="noopener">rdeRjo</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
-<p><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br>上面的例子包括了四种情况，分别是<br>1.不设置宽高[默认300x150]<br>2.设置canvas宽高<br>3.设置canvas初始化宽高+css设置同比例宽高<br>4.默认canvas宽高300x150+css设置宽高[200x200]<br>前两种情况没有什么特别，后两种情况，唯一的区别就是两者宽高比例是否一致，可以发现第三种情况canvas宽高和css设置的宽高比例一致，所以绘制的图形没有出现变形扭曲现象。而最后一种情况，默认canvas的宽高为300x150，与设置的css宽高200x200不一致，所以画布绘制的图形出现了变形扭曲的现象。综上，如果要用css来设置canvas的尺寸，需要跟canvas初始尺寸比例保持一致。</p>
-<h2 id="渲染上下文"><a href="#渲染上下文" class="headerlink" title="渲染上下文"></a>渲染上下文</h2><p><code>&lt;canvas&gt;</code>标签创建了一块固定大小的画布，公开了一个或多个渲染上下文，可以用来绘制和处理要展示的内容。如果要画布上绘制内容，就必须拿到canvas上下文，可以根据拿到的上下文，绘制各种图形等。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas1 = <span class="built_in">document</span>.getElementById(<span class="string">'canvas-1'</span>);</span><br><span class="line"><span class="keyword">var</span> ctx1 = canvas1.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>获取到ctx1这个上下文后，就可以调用提供的api绘制图形，如fillRect等。<br>本文主要介绍了canvas比较基础的用法，下一章会介绍如何通过canvas创建的上下文绘制各种图形。</p>
-<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage" target="_blank" rel="noopener">Canvas的基本用法</a></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fjspljhdnzj312w0hq40s.jpg" alt="图解"></p>
+<blockquote>
+<p>arc()函数中的角度单位是弧度，不是度数。<br>角度与弧度的js表达式: <code>radians=(Math.PI/180)*degrees</code>。其中radians为弧度，degress为角度。四分之一圆： <code>ctx.arc(50,50,20,0,(Math.PI/180)*90)</code>。例子如下：</p>
+</blockquote>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="aYpLrw" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="aYpLrw" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/aYpLrw/" target="_blank" rel="noopener">aYpLrw</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="绘制曲线"><a href="#绘制曲线" class="headerlink" title="绘制曲线"></a>绘制曲线</h2><p>canvas提供了一个绘制曲线的方法<code>arcTo(x1, y1, x2, y2)</code>，该方法需要结合<code>moveTo(x, y)</code>一起使用。</p>
+<ul>
+<li><code>(x, y)</code>表示曲线起点。 </li>
+<li><code>(x1, y1)</code>是控制点，用来控制曲线弯曲方向（曲线并不一定会经过控制点）。 </li>
+<li><code>(x2, y2)</code>是结束点（曲线并不一定会经过结束点）。</li>
+<li><code>r</code>表示圆弧的半径，用来控制曲线弧度的大小。</li>
+</ul>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="rdjYWw" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="rdjYWw" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/rdjYWw/" target="_blank" rel="noopener">rdjYWw</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="二次贝塞尔曲线"><a href="#二次贝塞尔曲线" class="headerlink" title="二次贝塞尔曲线"></a>二次贝塞尔曲线</h3><p><code>quadraticCurveTo(cp1x, cp1y, x, y)</code><br>绘制二次贝塞尔曲线，cp1x,cp1y为一个控制点，x,y为结束点。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="pLRdpR" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="pLRdpR" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/pLRdpR/" target="_blank" rel="noopener">pLRdpR</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="三次贝塞尔曲线"><a href="#三次贝塞尔曲线" class="headerlink" title="三次贝塞尔曲线"></a>三次贝塞尔曲线</h3><p><code>bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</code><br>绘制三次贝塞尔曲线，cp1x,cp1y为控制点一，cp2x,cp2y为控制点二，x,y为结束点。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="gegXxN" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="gegXxN" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/gegXxN/" target="_blank" rel="noopener">gegXxN</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+<hr>
+<p>参考资料：<br><a href="https://runjaelyn.github.io/2017/09/10/canvasBasic" target="_blank" rel="noopener">canvas 画布 - 基础</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes" target="_blank" rel="noopener">使用canvas来绘制图形</a></p>
 
       
     </div>
@@ -416,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/28/实现Android界面全屏展示/" rel="next" title="实现Android界面全屏展示">
-                <i class="fa fa-chevron-left"></i> 实现Android界面全屏展示
+              <a href="/2018/03/15/canvas-基础用法/" rel="next" title="canvas 基础用法">
+                <i class="fa fa-chevron-left"></i> canvas 基础用法
               </a>
             
           </div>
@@ -425,10 +446,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/20/canvas-绘制图形/" rel="prev" title="canvas 绘制图形">
-                canvas 绘制图形 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -551,7 +568,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Canvas简介"><span class="nav-number">1.</span> <span class="nav-text">Canvas简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Canvas属性"><span class="nav-number">2.</span> <span class="nav-text">Canvas属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染上下文"><span class="nav-number">3.</span> <span class="nav-text">渲染上下文</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制矩形"><span class="nav-number">1.</span> <span class="nav-text">绘制矩形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制路径"><span class="nav-number">2.</span> <span class="nav-text">绘制路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制三角形"><span class="nav-number">2.1.</span> <span class="nav-text">绘制三角形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动笔触"><span class="nav-number">2.2.</span> <span class="nav-text">移动笔触</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线"><span class="nav-number">2.3.</span> <span class="nav-text">线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#圆弧"><span class="nav-number">2.4.</span> <span class="nav-text">圆弧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制曲线"><span class="nav-number">3.</span> <span class="nav-text">绘制曲线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二次贝塞尔曲线"><span class="nav-number">3.1.</span> <span class="nav-text">二次贝塞尔曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次贝塞尔曲线"><span class="nav-number">3.2.</span> <span class="nav-text">三次贝塞尔曲线</span></a></li></ol></li></ol></div>
             
 
           </div>

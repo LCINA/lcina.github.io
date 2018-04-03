@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上一篇讲了如何用canvas绘制简单的图形曲线等，也在图形中加了颜色等。这一篇主要讲下如何添加样式和颜色。 色彩fillStyle设置图形的填充颜色，fillStyle = color，color可以表示css颜色值的字符串、渐变对象或者图案对象。12345// 这些 fillStyle 的值均为 &apos;橙色&apos;ctx.fillStyle = &quot;orange&quot;;ctx.fillStyle = &quot;#FFA">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas 添加样式和颜色">
+<meta property="og:url" content="http://lcina.github.io/2018/03/26/canvas-添加样式和颜色/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="上一篇讲了如何用canvas绘制简单的图形曲线等，也在图形中加了颜色等。这一篇主要讲下如何添加样式和颜色。 色彩fillStyle设置图形的填充颜色，fillStyle = color，color可以表示css颜色值的字符串、渐变对象或者图案对象。12345// 这些 fillStyle 的值均为 &apos;橙色&apos;ctx.fillStyle = &quot;orange&quot;;ctx.fillStyle = &quot;#FFA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://lcina.github.io/2018/03/26/canvas-添加样式和颜色/canvas-grid.png">
+<meta property="og:updated_time" content="2018-04-03T06:10:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas 添加样式和颜色">
+<meta name="twitter:description" content="上一篇讲了如何用canvas绘制简单的图形曲线等，也在图形中加了颜色等。这一篇主要讲下如何添加样式和颜色。 色彩fillStyle设置图形的填充颜色，fillStyle = color，color可以表示css颜色值的字符串、渐变对象或者图案对象。12345// 这些 fillStyle 的值均为 &apos;橙色&apos;ctx.fillStyle = &quot;orange&quot;;ctx.fillStyle = &quot;#FFA">
+<meta name="twitter:image" content="http://lcina.github.io/2018/03/26/canvas-添加样式和颜色/canvas-grid.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2018/03/26/canvas-添加样式和颜色/"/>
+
+
+
+
+
+  <title>canvas 添加样式和颜色 | Lcina的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?afe5ccc67e80010f408dc44bbb72d0b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/03/26/canvas-添加样式和颜色/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">canvas 添加样式和颜色</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T10:21:30+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/26/canvas-添加样式和颜色/" class="leancloud_visitors" data-flag-title="canvas 添加样式和颜色">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一篇讲了如何用<code>canvas</code>绘制简单的图形曲线等，也在图形中加了颜色等。这一篇主要讲下如何添加样式和颜色。</p>
+<h2 id="色彩"><a href="#色彩" class="headerlink" title="色彩"></a>色彩</h2><h3 id="fillStyle"><a href="#fillStyle" class="headerlink" title="fillStyle"></a>fillStyle</h3><p>设置图形的填充颜色，<code>fillStyle = color</code>，color可以表示<a href="https://www.w3.org/TR/css-color-3/" target="_blank" rel="noopener">css颜色值</a>的字符串、渐变对象或者图案对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这些 fillStyle 的值均为 '橙色'</span></span><br><span class="line">ctx.fillStyle = <span class="string">"orange"</span>;</span><br><span class="line">ctx.fillStyle = <span class="string">"#FFA500"</span>;</span><br><span class="line">ctx.fillStyle = <span class="string">"rgb(255,165,0)"</span>;</span><br><span class="line">ctx.fillStyle = <span class="string">"rgba(255,165,0,1)"</span>;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>fillStyle示例：</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="RMJJJV" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="RMJJJV" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/RMJJJV/" target="_blank" rel="noopener">RMJJJV</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="strokeStyle"><a href="#strokeStyle" class="headerlink" title="strokeStyle"></a>strokeStyle</h3><p>设置图形轮廓的颜色，<code>strokeStyle = color</code>，这里color的表示跟fillStyle一致。</p>
+<blockquote>
+<p>注意: 一旦您设置了 strokeStyle 或者 fillStyle 的值，那么这个新值就会成为新绘制的图形的默认值。如果你要给每个图形上不同的颜色，你需要重新设置 fillStyle 或 strokeStyle 的值。</p>
+</blockquote>
+<p>strokeStyle示例：</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="rdKKZX" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="rdKKZX" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/rdKKZX/" target="_blank" rel="noopener">rdKKZX</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h2><p>globalAlpha属性，可以设置图形透明度，根据直译，该属性用来设置全局图形透明，但是在此属性之前定义的图形透明度不受其影响。对于单个图形透明度的设置，可以根据css3颜色值，设置具有透明度的颜色。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定透明颜色，用于描边和填充样式</span></span><br><span class="line">ctx.strokeStyle = <span class="string">"rgba(255,0,0,0.5)"</span>;</span><br><span class="line">ctx.fillStyle = <span class="string">"rgba(255,0,0,0.5)"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>globalAlpha 示例：</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="LdrBPx" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="LdrBPx" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/LdrBPx/" target="_blank" rel="noopener">LdrBPx</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="线型"><a href="#线型" class="headerlink" title="线型"></a>线型</h2><h3 id="lineWidth"><a href="#lineWidth" class="headerlink" title="lineWidth"></a>lineWidth</h3><p>根据属性名就可以知道该属性用来设置线段的粗细，默认值为1，且必须为正数。<br><strong>线宽是指给定路径的中心到两边的粗细。换句话说就是在路径的两边各绘制线宽的一半。</strong>因为画布的坐标并不和像素直接对应，当需要获得精确的水平或垂直线的时候要特别注意。MDN文档中用一个例子，讲了这个问题。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="wmXxrO" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="wmXxrO" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/wmXxrO/" target="_blank" rel="noopener">wmXxrO</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>从上面例子可以发现，所有宽度为奇数的线段边缘看起来有点失真，不能精确呈现，这是因为路径的定位问题。</p>
+<p>用网格来代表 <code>canvas</code> 的坐标格，每一格对应屏幕上一个像素点。在第一个图中，填充了 (2,1) 至 (5,5) 的矩形，整个区域的边界刚好落在像素边缘上，这样就可以得到的矩形有着清晰的边缘。<br><img src="/2018/03/26/canvas-添加样式和颜色/canvas-grid.png" alt="图解"><br>如果你想要绘制一条从 (3,1) 到 (3,5)，宽度是 1.0 的线条，你会得到像第二幅图一样的结果。实际填充区域（深蓝色部分）仅仅延伸至路径两旁各一半像素。而这半个像素又会以近似的方式进行渲染，这意味着那些像素只是部分着色，结果就是以实际笔触颜色一半色调的颜色来填充整个区域（浅蓝和深蓝的部分）。这就是上例中为何宽度为 1.0 的线并不准确的原因。</p>
+<p>要解决这个问题，你必须对路径施以更加精确的控制。已知粗 1.0 的线条会在路径两边各延伸半像素，那么像第三幅图那样绘制从 (3.5,1) 到 (3.5,5) 的线条，其边缘正好落在像素边界，填充出来就是准确的宽为 1.0 的线条。</p>
+<p>对于那些宽度为偶数的线条，每一边的像素数都是整数，那么你想要其路径是落在像素点之间 (如那从 (3,1) 到 (3,5)) 而不是在像素点的中间。同样，注意到那个例子的垂直线条，其 Y 坐标刚好落在网格线上，如果不是的话，端点上同样会出现半渲染的像素点。</p>
+<p>虽然开始处理可缩放的 2D 图形时会有点小痛苦，但是及早注意到像素网格与路径位置之间的关系，可以确保图形在经过缩放或者其它任何变形后都可以保持看上去蛮好：线宽为 1.0 的垂线在放大 2 倍后，会变成清晰的线宽为 2.0，并且出现在它应该出现的位置上。</p>
+<h3 id="lineCap"><a href="#lineCap" class="headerlink" title="lineCap"></a>lineCap</h3><p>该属性决定了线段端点显示的样式。包含3个属性值：butt，round 和 square。默认是butt。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="geKjEE" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="geKjEE" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/geKjEE/" target="_blank" rel="noopener">geKjEE</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>最左边的线用了默认的 butt 。可以注意到它是与辅助线齐平的。中间的是 round 的效果，端点处加上了<strong>半径为一半线宽</strong>的半圆。右边的是 square 的效果，端点处加上了<strong>等宽且高度为一半线宽</strong>的方块。</p>
+<h3 id="lineJoin"><a href="#lineJoin" class="headerlink" title="lineJoin"></a>lineJoin</h3><p>该属性决定了图形中两线段连接处所显示的样子。包含3个属性值：round, bevel 和 miter。默认是miter。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="OvEwKK" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="OvEwKK" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/OvEwKK/" target="_blank" rel="noopener">OvEwKK</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>同样用三条折线来做例子，分别设置不同的 lineJoin 值。最上面一条是 round 的效果，边角处被磨圆了，圆的半径等于线宽。中间和最下面一条分别是 bevel 和 miter 的效果。当值是 miter 的时候，线段会在连接处外侧延伸直至交于一点，延伸效果受到下面将要介绍的 miterLimit 属性的制约。</p>
+<h3 id="使用虚线"><a href="#使用虚线" class="headerlink" title="使用虚线"></a>使用虚线</h3><p>用 <code>setLineDash</code> 方法和 <code>lineDashOffset</code> 属性来制定虚线样式。<code>setLineDash</code> 方法接受一个数组，来指定线段与间隙的交替；<code>lineDashOffset</code> 属性设置起始偏移量。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="rdKZaz" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="rdKZaz" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/rdKZaz/" target="_blank" rel="noopener">rdKZaz</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><p>用线性或者径向的渐变来填充或描边。</p>
+<h3 id="线性渐变"><a href="#线性渐变" class="headerlink" title="线性渐变"></a>线性渐变</h3><p><code>createLinearGradient(x1, y1, x2, y2)</code>，<code>createLinearGradient</code> 方法接受 4 个参数，表示渐变的起点 (x1,y1) 与终点 (x2,y2)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lineargradient = ctx.createLinearGradient(<span class="number">0</span>,<span class="number">0</span>,<span class="number">150</span>,<span class="number">150</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="径向渐变"><a href="#径向渐变" class="headerlink" title="径向渐变"></a>径向渐变</h3><p><code>createRadialGradient(x1, y1, r1, x2, y2, r2)</code>，createRadialGradient 方法接受 6 个参数，前三个定义一个以 (x1,y1) 为原点，半径为 r1 的圆，后三个参数则定义另一个以 (x2,y2) 为原点，半径为 r2 的圆。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> radialgradient = ctx.createRadialGradient(<span class="number">75</span>,<span class="number">75</span>,<span class="number">0</span>,<span class="number">75</span>,<span class="number">75</span>,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="addColorStop"><a href="#addColorStop" class="headerlink" title="addColorStop"></a>addColorStop</h3><p><code>gradient.addColorStop(position, color)</code>，addColorStop 方法接受 2 个参数，position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF， rgba(0,0,0,1)，等等）。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="wmXEgK" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="wmXEgK" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/wmXEgK/" target="_blank" rel="noopener">wmXEgK</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="图案样式"><a href="#图案样式" class="headerlink" title="图案样式"></a>图案样式</h2><p><code>createPattern(image, type)</code>，该方法接受两个参数。Image 可以是一个 Image 对象的引用，或者另一个 <code>canvas</code> 对象。Type 必须是下面的字符串值之一：repeat，repeat-x，repeat-y 和 no-repeat。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.src = <span class="string">'someimage.png'</span>;</span><br><span class="line"><span class="keyword">var</span> ptrn = ctx.createPattern(img,<span class="string">'repeat'</span>);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：与 drawImage 有点不同，你需要确认 image 对象已经装载完毕，否则图案可能效果不对的。</p>
+</blockquote>
+<h2 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h2><p><code>shadowOffsetX = float</code><br><code>shadowOffsetY = float</code><br><code>shadowOffsetX</code> 和 <code>shadowOffsetY</code> 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。</p>
+<p><code>shadowBlur = float</code><br>shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。</p>
+<p><code>shadowColor = color</code><br>shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="yKEQem" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="yKEQem" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/yKEQem/" target="_blank" rel="noopener">yKEQem</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Canvas-填充规则"><a href="#Canvas-填充规则" class="headerlink" title="Canvas 填充规则"></a>Canvas 填充规则</h2><p>当我们用到 fill（或者 clip和isPointinPath ）你可以选择一个填充规则，该填充规则根据某处在路径的外面或者里面来决定该处是否被填充，这对于自己与自己路径相交或者路径被嵌套的时候是有用的。</p>
+<p></p><p data-height="265" data-theme-id="light" data-slug-hash="QmxJEP" data-default-tab="js,result" data-user="LCINA" data-embed-version="2" data-pen-title="QmxJEP" class="codepen">See the Pen <a href="https://codepen.io/LCINA/pen/QmxJEP/" target="_blank" rel="noopener">QmxJEP</a> by LCINA (<a href="https://codepen.io/LCINA" target="_blank" rel="noopener">@LCINA</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>参考资料：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Applying_styles_and_colors" target="_blank" rel="noopener">使用样式和颜色</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/canvas-绘制图形/" rel="next" title="canvas 绘制图形">
+                <i class="fa fa-chevron-left"></i> canvas 绘制图形
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#色彩"><span class="nav-number">1.</span> <span class="nav-text">色彩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fillStyle"><span class="nav-number">1.1.</span> <span class="nav-text">fillStyle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strokeStyle"><span class="nav-number">1.2.</span> <span class="nav-text">strokeStyle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明度"><span class="nav-number">2.</span> <span class="nav-text">透明度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线型"><span class="nav-number">3.</span> <span class="nav-text">线型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lineWidth"><span class="nav-number">3.1.</span> <span class="nav-text">lineWidth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lineCap"><span class="nav-number">3.2.</span> <span class="nav-text">lineCap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lineJoin"><span class="nav-number">3.3.</span> <span class="nav-text">lineJoin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用虚线"><span class="nav-number">3.4.</span> <span class="nav-text">使用虚线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变"><span class="nav-number">4.</span> <span class="nav-text">渐变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性渐变"><span class="nav-number">4.1.</span> <span class="nav-text">线性渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#径向渐变"><span class="nav-number">4.2.</span> <span class="nav-text">径向渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addColorStop"><span class="nav-number">4.3.</span> <span class="nav-text">addColorStop</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图案样式"><span class="nav-number">5.</span> <span class="nav-text">图案样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阴影"><span class="nav-number">6.</span> <span class="nav-text">阴影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Canvas-填充规则"><span class="nav-number">7.</span> <span class="nav-text">Canvas 填充规则</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("8Cgz2ufsVnbtprMNRJQXoCT2-gzGzoHsz", "F3rba0mUEIw7dY8SeLRzd9Vq");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="移动端," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在实际Android开发过程中，隐藏标题栏，甚至是华为等系列的虚拟按键，可以让界面看起来更加清爽一点，那么怎么隐藏那些对于用户来说，无用的区域呢？网上搜一下，一堆教程，这里介绍我成功的一种。创建BaseActivity类，继承Activity，里面具体重写方法这里就不贴了。增加fullScreenDisplay方法，代码如下。">
-<meta name="keywords" content="移动端">
+<meta name="description" content="原文链接：If… Else, or not! 简化条件判断1234567if (red) &amp;#123;    return true;&amp;#125; else if (blue) &amp;#123;    return true;&amp;#125; else &amp;#123;    return false;&amp;#125; 可将代码重构为： 1234if (red || blue) &amp;#123;    return">
+<meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现Android界面全屏展示">
-<meta property="og:url" content="http://lcina.github.io/2017/11/28/实现Android界面全屏展示/index.html">
+<meta property="og:title" content="如何尽量避免不必要的if...else...">
+<meta property="og:url" content="http://lcina.github.io/2018/07/03/如何尽量避免不必要的if-else/index.html">
 <meta property="og:site_name" content="Lcina的博客">
-<meta property="og:description" content="在实际Android开发过程中，隐藏标题栏，甚至是华为等系列的虚拟按键，可以让界面看起来更加清爽一点，那么怎么隐藏那些对于用户来说，无用的区域呢？网上搜一下，一堆教程，这里介绍我成功的一种。创建BaseActivity类，继承Activity，里面具体重写方法这里就不贴了。增加fullScreenDisplay方法，代码如下。">
+<meta property="og:description" content="原文链接：If… Else, or not! 简化条件判断1234567if (red) &amp;#123;    return true;&amp;#125; else if (blue) &amp;#123;    return true;&amp;#125; else &amp;#123;    return false;&amp;#125; 可将代码重构为： 1234if (red || blue) &amp;#123;    return">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-13T07:47:13.000Z">
+<meta property="og:updated_time" content="2018-07-03T06:14:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现Android界面全屏展示">
-<meta name="twitter:description" content="在实际Android开发过程中，隐藏标题栏，甚至是华为等系列的虚拟按键，可以让界面看起来更加清爽一点，那么怎么隐藏那些对于用户来说，无用的区域呢？网上搜一下，一堆教程，这里介绍我成功的一种。创建BaseActivity类，继承Activity，里面具体重写方法这里就不贴了。增加fullScreenDisplay方法，代码如下。">
+<meta name="twitter:title" content="如何尽量避免不必要的if...else...">
+<meta name="twitter:description" content="原文链接：If… Else, or not! 简化条件判断1234567if (red) &amp;#123;    return true;&amp;#125; else if (blue) &amp;#123;    return true;&amp;#125; else &amp;#123;    return false;&amp;#125; 可将代码重构为： 1234if (red || blue) &amp;#123;    return">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://lcina.github.io/2017/11/28/实现Android界面全屏展示/"/>
+  <link rel="canonical" href="http://lcina.github.io/2018/07/03/如何尽量避免不必要的if-else/"/>
 
 
 
 
 
-  <title>实现Android界面全屏展示 | Lcina的博客</title>
+  <title>如何尽量避免不必要的if...else... | Lcina的博客</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/11/28/实现Android界面全屏展示/">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/07/03/如何尽量避免不必要的if-else/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lcina">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">实现Android界面全屏展示</h1>
+          <h1 class="post-title" itemprop="name headline">如何尽量避免不必要的if...else...</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-28T16:42:55+08:00">
-                2017-11-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T11:52:45+08:00">
+                2018-07-03
               </time>
             
 
@@ -290,7 +290,7 @@
 
           
           
-             <span id="/2017/11/28/实现Android界面全屏展示/" class="leancloud_visitors" data-flag-title="实现Android界面全屏展示">
+             <span id="/2018/07/03/如何尽量避免不必要的if-else/" class="leancloud_visitors" data-flag-title="如何尽量避免不必要的if...else...">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -321,8 +321,15 @@
       
 
       
-        <p>在实际Android开发过程中，隐藏标题栏，甚至是华为等系列的虚拟按键，可以让界面看起来更加清爽一点，那么怎么隐藏那些对于用户来说，无用的区域呢？网上搜一下，一堆教程，这里介绍我成功的一种。创建BaseActivity类，继承Activity，里面具体重写方法这里就不贴了。增加fullScreenDisplay方法，代码如下。<a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 实现全屏显示</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fullScreenDisplay</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt; <span class="number">11</span> &amp;&amp; Build.VERSION.SDK_INT &lt; <span class="number">19</span>) &#123;</span><br><span class="line">          View v = <span class="keyword">this</span>.getWindow().getDecorView();</span><br><span class="line">          v.setSystemUiVisibility(View.GONE);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</span><br><span class="line">          <span class="comment">//for new api versions.</span></span><br><span class="line">          View decorView = getWindow().getDecorView();</span><br><span class="line">          <span class="keyword">int</span> uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</span><br><span class="line">                  | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;</span><br><span class="line">          decorView.setSystemUiVisibility(uiOptions);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<p>接着在onCreate()和onResume()中分别调用该方法，这样就可以实现屏幕全屏了。比如你想让首屏界面全屏展示，创建SplashActivity，继承BaseActivity，这样首屏界面就能全屏展示了。当然里面还是需要修改些东西的，这里参考一下怎么设置首屏界面即可，这里可以参考该文章。那其他比如MainActivity继承了BaseActivity，在其他手机看背景界面啥的都是全屏，但是荣耀手机上面出现了一个奇怪的问题，就是一启动app，上方标题栏是显示的，而且显示的是全白色，没有任何东西，不用虚，直接在MainActivity这样设置即可。这样问题就解决了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <p>原文链接：<a href="https://medium.com/dailyjs/if-else-or-not-d48dac62c67d" target="_blank" rel="noopener">If… Else, or not!</a></p>
+<h2 id="简化条件判断"><a href="#简化条件判断" class="headerlink" title="简化条件判断"></a>简化条件判断</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (red) &#123;</span><br><span class="line">    return true;</span><br><span class="line">&#125; else if (blue) &#123;</span><br><span class="line">    return true;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可将代码重构为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (red || blue) &#123;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">return false;</span><br></pre></td></tr></table></figure>
+<h2 id="ObjectMapper"><a href="#ObjectMapper" class="headerlink" title="ObjectMapper"></a>ObjectMapper</h2><p>这种做法是原文作者最爱的一种模式之一，适用于不同的场景，不管是后端还是前端项目。而且最重要的是这种做法让代码看起来非常简单，可读性也强。最基本的表现形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const colors = &#123;</span><br><span class="line">  red: true,</span><br><span class="line">  blue: true,</span><br><span class="line">  &apos;default&apos;: false,</span><br><span class="line"> &#125;;</span><br><span class="line">const colorMapper = color =&gt; colors[color] || colors[&apos;default&apos;];</span><br><span class="line">const color = colorMapper(item.color);</span><br></pre></td></tr></table></figure>
+<h2 id="ObjectMapper在React中的应用"><a href="#ObjectMapper在React中的应用" class="headerlink" title="ObjectMapper在React中的应用"></a>ObjectMapper在React中的应用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// props</span><br><span class="line">const items = [&#123;</span><br><span class="line"> type: ‘hero’,</span><br><span class="line"> content: : &#123;…&#125;,</span><br><span class="line">&#125;, &#123;</span><br><span class="line"> type: &apos;text&apos;,</span><br><span class="line"> content: : &#123;…&#125;,</span><br><span class="line">&#125;, &#123;</span><br><span class="line"> type: &apos;image_and_text&apos;,</span><br><span class="line"> content: : &#123;…&#125;,</span><br><span class="line">&#125;, &#123;</span><br><span class="line"> type: &apos;text&apos;,</span><br><span class="line"> content: : &#123;…&#125;,</span><br><span class="line">&#125;, &#123;</span><br><span class="line"> type: &apos;call_to_action&apos;,</span><br><span class="line"> content: : &#123;…&#125;,</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 将所有组件存在对象中，对象key值为props的type值</span><br><span class="line">const components = &#123;</span><br><span class="line"> hero: HeroComponent,</span><br><span class="line"> text: TextComponent,</span><br><span class="line"> image_and_text: ImageAndTextComponent,</span><br><span class="line"> call_to_action: CallToActionComponent,</span><br><span class="line"> &apos;default&apos;: null,</span><br><span class="line">&#125;;</span><br><span class="line">const componentMapper = type =&gt; </span><br><span class="line">components[type] || components[&apos;default&apos;];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import react from ‘react’;</span><br><span class="line">const RenderItems = props =&gt; &#123;</span><br><span class="line"> const componentList = props.items((item, index) =&gt; &#123;</span><br><span class="line">   const Component = componentMapper(item.type);</span><br><span class="line">   return &lt;Component content=&#123;item.content&#125; /&gt;</span><br><span class="line"> &#125;;</span><br><span class="line"> return (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">   &#123;componentList&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"> )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -340,7 +347,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/移动端/" rel="tag"># 移动端</a>
+            <a href="/tags/前端/" rel="tag"># 前端</a>
           
         </div>
       
@@ -353,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/08/今天打开博客发现503了，一脸懵逼/" rel="next" title="今天打开博客发现503了，一脸懵逼">
-                <i class="fa fa-chevron-left"></i> 今天打开博客发现503了，一脸懵逼
+              <a href="/2018/06/20/css如何实现类似苹果原生loading效果/" rel="next" title="css实现类似苹果原生loading效果">
+                <i class="fa fa-chevron-left"></i> css实现类似苹果原生loading效果
               </a>
             
           </div>
@@ -362,10 +369,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/15/canvas-基础用法/" rel="prev" title="canvas 基础用法">
-                canvas 基础用法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,8 +420,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -469,6 +481,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简化条件判断"><span class="nav-number">1.</span> <span class="nav-text">简化条件判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectMapper"><span class="nav-number">2.</span> <span class="nav-text">ObjectMapper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectMapper在React中的应用"><span class="nav-number">3.</span> <span class="nav-text">ObjectMapper在React中的应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

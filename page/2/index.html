@@ -1144,7 +1144,7 @@
 
       
         
-          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">s_lg_img</span> <span class="attr">src</span>=<span class="string">"(\S+)"</span>/;</span></span></span><br><span class="line"><span class="xml">let imgUrl = websiteReg.exec(websiteCode)[1];</span></span><br></pre></td></tr></table></figure></p>
+          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = &lt;img id=s_lg_img src="(\S+)"/;</span><br><span class="line">let imgUrl = websiteReg.exec(websiteCode)[1];</span><br></pre></td></tr></table></figure></p>
 <p>其中imgUrl就是图片的链接地址，这样就可以利用正则表达式匹配出hostname和path，其正则表达式是：</p>
           <!--noindex-->
           <div class="post-button text-center">

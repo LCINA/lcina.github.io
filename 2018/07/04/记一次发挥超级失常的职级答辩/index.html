@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Lcina的博客">
 <meta property="og:description" content="评委问的问题回答的很糟糕。后面一些问题直接就不想回答了，这个是个很严重的错误。其实一些问题在项目中确实很多地方用到，但是只要被问到一些实现机制、一些替代方法可能就直接pass了。所以前端不要局限于单纯解决问题，关键还是要想想我用这个方法，它是如何去实现的，如果让自己去解决这个问题，不依赖于库或者插件，自己怎么去实现。不逼逼了，列下一些还记得的问题做做记录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T08:39:17.000Z">
+<meta property="og:updated_time" content="2018-07-04T10:59:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次发挥超级失常的职级答辩...">
 <meta name="twitter:description" content="评委问的问题回答的很糟糕。后面一些问题直接就不想回答了，这个是个很严重的错误。其实一些问题在项目中确实很多地方用到，但是只要被问到一些实现机制、一些替代方法可能就直接pass了。所以前端不要局限于单纯解决问题，关键还是要想想我用这个方法，它是如何去实现的，如果让自己去解决这个问题，不依赖于库或者插件，自己怎么去实现。不逼逼了，列下一些还记得的问题做做记录。">
@@ -324,7 +324,7 @@
         <p>评委问的问题回答的很糟糕。后面一些问题直接就不想回答了，这个是个很严重的错误。其实一些问题在项目中确实很多地方用到，但是只要被问到一些实现机制、一些替代方法可能就直接pass了。所以前端不要局限于单纯解决问题，关键还是要想想我用这个方法，它是如何去实现的，如果让自己去解决这个问题，不依赖于库或者插件，自己怎么去实现。不逼逼了，列下一些还记得的问题做做记录。<br><a id="more"></a></p>
 <ol>
 <li>flux还是redux</li>
-<li>webpack打包是一个怎样的过程；</li>
+<li>webpack打包是一个怎样的过程,babel的作用；</li>
 <li>项目中遇到问题如何定位，如何解决;</li>
 <li>题目：async function a { return 1; }，执行a()，返回什么；</li>
 <li>js有哪些继承方式，列举一下；</li>
@@ -338,7 +338,27 @@
 <li>如何实现一个B类继承A类的某些方法；</li>
 <li>js静态类；</li>
 <li>文档流，脱离文档流的操作；</li>
-<li>Object.assign是深拷贝还是浅拷贝</li>
+<li>Object.assign是深拷贝还是浅拷贝；</li>
+<li><p>设计模式——观察者模式</p>
+<p>参考：</p>
+</li>
+<li><a href="http://imweb.io/topic/57711e37f0a5487b05f325b5" target="_blank" rel="noopener">http://imweb.io/topic/57711e37f0a5487b05f325b5</a>; <a href="https://medium.com/@tkssharma/facebooks-flux-vs-redux-d02b5348cc17" target="_blank" rel="noopener">https://medium.com/@tkssharma/facebooks-flux-vs-redux-d02b5348cc17</a></li>
+<li><a href="http://taobaofed.org/blog/2016/09/09/webpack-flow/" target="_blank" rel="noopener">http://taobaofed.org/blog/2016/09/09/webpack-flow/</a>; <a href="https://github.com/hawx1993/tech-blog/issues/3" target="_blank" rel="noopener">https://github.com/hawx1993/tech-blog/issues/3</a>; <a href="https://github.com/lcxfs1991/blog/issues/9" target="_blank" rel="noopener">https://github.com/lcxfs1991/blog/issues/9</a></li>
+<li>根据自身情况说就行</li>
+<li>返回的结果是一个promise，如果想拿到值，直接这样做: let a = await a();</li>
+<li><a href="https://xxxgitone.github.io/2017/06/12/JavaScript%E5%85%AD%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/" target="_blank" rel="noopener">https://xxxgitone.github.io/2017/06/12/JavaScript%E5%85%AD%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/</a>; <a href="http://www.ayqy.net/blog/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3js%E7%9A%846%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/" target="_blank" rel="noopener">http://www.ayqy.net/blog/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3js%E7%9A%846%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/</a>; <a href="https://juejin.im/entry/5993eeaa51882524382f3c0b" target="_blank" rel="noopener">https://juejin.im/entry/5993eeaa51882524382f3c0b</a></li>
+<li>webpack遵循commonjs规范；commonjs规范: <a href="http://javascript.ruanyifeng.com/nodejs/module.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/nodejs/module.html</a>; <a href="https://segmentfault.com/a/1190000010349749" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010349749</a></li>
+<li><a href="https://blog.csdn.net/q1056843325/article/details/53147180" target="_blank" rel="noopener">https://blog.csdn.net/q1056843325/article/details/53147180</a></li>
+<li>JavaScript Promise简介: <a href="https://developers.google.com/web/fundamentals/primers/promises?hl=zh-cn#whats-all-the-fuss-about" target="_blank" rel="noopener">https://developers.google.com/web/fundamentals/primers/promises?hl=zh-cn#whats-all-the-fuss-about</a><br>JavaScript Promise小书: <a href="http://liubin.org/promises-book/" target="_blank" rel="noopener">http://liubin.org/promises-book/</a></li>
+<li><a href="https://github.com/iuap-design/blog/issues/206" target="_blank" rel="noopener">https://github.com/iuap-design/blog/issues/206</a>; <a href="https://blog.csdn.net/Small_loving/article/details/50950684" target="_blank" rel="noopener">https://blog.csdn.net/Small_loving/article/details/50950684</a></li>
+<li>History对象 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/pushState" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/History/pushState</a>; <a href="https://www.zhangxinxu.com/wordpress/2013/06/html5-history-api-pushstate-replacestate-ajax/" target="_blank" rel="noopener">https://www.zhangxinxu.com/wordpress/2013/06/html5-history-api-pushstate-replacestate-ajax/</a></li>
+<li><a href="https://leohxj.gitbooks.io/front-end-database/html-and-css-basic/box-module.html" target="_blank" rel="noopener">https://leohxj.gitbooks.io/front-end-database/html-and-css-basic/box-module.html</a></li>
+<li><a href="https://juejin.im/post/5ae072906fb9a07a9e4ce596" target="_blank" rel="noopener">https://juejin.im/post/5ae072906fb9a07a9e4ce596</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Inheritance" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Inheritance</a></li>
+<li><a href="http://www.voidcn.com/article/p-oencbpjk-bay.html" target="_blank" rel="noopener">http://www.voidcn.com/article/p-oencbpjk-bay.html</a>; 扩展：<a href="https://blog.csdn.net/qq_30100043/article/details/53542966[es6" target="_blank" rel="noopener">https://blog.csdn.net/qq_30100043/article/details/53542966[es6</a> javascript的class的静态方法、属性和实例属性]</li>
+<li>绝对定位、固定定位、float <a href="https://blog.csdn.net/qq_21184771/article/details/56049662" target="_blank" rel="noopener">https://blog.csdn.net/qq_21184771/article/details/56049662</a></li>
+<li><a href="https://blog.csdn.net/waiterwaiter/article/details/50267787" target="_blank" rel="noopener">https://blog.csdn.net/waiterwaiter/article/details/50267787</a>; <a href="https://github.com/wengjq/Blog/issues/3[同时可以看看评论]" target="_blank" rel="noopener">https://github.com/wengjq/Blog/issues/3[同时可以看看评论]</a></li>
+<li><a href="https://juejin.im/entry/58c280b1da2f600d8725b887" target="_blank" rel="noopener">https://juejin.im/entry/58c280b1da2f600d8725b887</a></li>
 </ol>
 
       

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Lcina, Lcina的博客, 前端, 服务端, 移动端, Lcinb" />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lcina的博客">
-<meta property="og:url" content="http://lcina.github.io/archives/2017/10/index.html">
+<meta name="description" content="Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web worker简单使用教程">
+<meta property="og:url" content="http://lcina.github.io/2018/07/16/web-worker简单使用教程/index.html">
 <meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-16T06:25:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lcina的博客">
+<meta name="twitter:title" content="web worker简单使用教程">
+<meta name="twitter:description" content="Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://lcina.github.io/archives/2017/10/"/>
+  <link rel="canonical" href="http://lcina.github.io/2018/07/16/web-worker简单使用教程/"/>
 
 
 
 
 
-  <title>归档 | Lcina的博客</title>
+  <title>web worker简单使用教程 | Lcina的博客</title>
   
 
 
@@ -150,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,111 +229,163 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 24 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/07/16/web-worker简单使用教程/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/10/17/Css实现容器水平垂直居中/" itemprop="url">
-              
-                <span itemprop="name">Css实现容器水平垂直居中</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">web worker简单使用教程</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-17T14:35:59+08:00"
-              content="2017-10-17" >
-          10-17
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-16T14:04:51+08:00">
+                2018-07-16
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/16/web-worker简单使用教程/" class="leancloud_visitors" data-flag-title="web worker简单使用教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/13/Redux-TodoList例子解析-自己胡编乱造/" itemprop="url">
-              
-                <span itemprop="name">Redux TodoList例子解析[自己胡编乱造]</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-13T17:27:07+08:00"
-              content="2017-10-13" >
-          10-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——《<a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">Web Worker 使用教程</a>》<br>然后一些worker使用限制在该文章中也有提到，本文主要是通过一个简单的例子来讲讲web worker的使用。</p>
+<h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><p>在主线程中创建一个worker线程，<code>var worker = new Worker(&#39;./worker-example.js&#39;);</code>,通过主线程将数据传给worker；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.postMessage(&#123;</span><br><span class="line">    description: &apos;发送请求&apos;,</span><br><span class="line">    url: &apos;./data/1.json&apos;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>主线程通过<code>onmessage</code>函数监听，接收子进程返回的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">worker.onmessage = function (event) &#123;</span><br><span class="line">    console.log(&apos;Received message &apos; + event.data);</span><br><span class="line">    var codeEle = document.getElementsByTagName(&apos;code&apos;)[0];</span><br><span class="line">    if(Object.getOwnPropertyNames(event.data).length) &#123;</span><br><span class="line">        codeEle.innerHTML = event.data;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        codeEle.innerHTML = &apos;未收到数据&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    worker.terminate(); //通过主进程关闭worker</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="worker线程"><a href="#worker线程" class="headerlink" title="worker线程"></a>worker线程</h2><p>worker通过<code>message</code>函数监听主线程发送过来的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(&apos;message&apos;, function (e) &#123;</span><br><span class="line">  var data = e.data;</span><br><span class="line">  var url = data.url;</span><br><span class="line">  request(&#123;</span><br><span class="line">    url: url</span><br><span class="line">  &#125;).then(data =&gt; &#123;</span><br><span class="line">    self.postMessage(&apos;原始数据:\n &apos; + data);</span><br><span class="line">    self.close();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure></p>
+<p>这样一个简单的web worker例子就完成了。</p>
+<p>例子地址：<a href="https://github.com/LCINA/-web-worker-" target="_blank" rel="noopener">https://github.com/LCINA/-web-worker-</a></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/04/记一次发挥超级失常的职级答辩/" rel="next" title="记一次发挥超级失常的职级答辩...">
+                <i class="fa fa-chevron-left"></i> 记一次发挥超级失常的职级答辩...
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -336,6 +393,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -356,8 +417,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -408,6 +478,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主线程"><span class="nav-number">1.</span> <span class="nav-text">主线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#worker线程"><span class="nav-number">2.</span> <span class="nav-text">worker线程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -541,6 +627,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

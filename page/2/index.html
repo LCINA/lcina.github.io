@@ -239,6 +239,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/10/17/Css实现容器水平垂直居中/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/17/Css实现容器水平垂直居中/" itemprop="url">Css实现容器水平垂直居中</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T14:35:59+08:00">
+                2017-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/17/Css实现容器水平垂直居中/" class="leancloud_visitors" data-flag-title="Css实现容器水平垂直居中">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>对于css实现水平垂直居中的方法，在前端开发中涉及的也比较多，在开发中经常使用的是flex布局以及绝对定位来实现居中方式，其实懂个三四种实现方式已经足够，但是这里将这些方法总结一下，这里只包括容器水平垂直居中的总结，可能不适用于图片文字等，图片字体的垂直居中其实也可以在下面的方法找到解决方式。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/17/Css实现容器水平垂直居中/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/10/13/Redux-TodoList例子解析-自己胡编乱造/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1280,7 +1415,7 @@
 
       
         
-          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">s_lg_img</span> <span class="attr">src</span>=<span class="string">"(\S+)"</span>/;</span></span></span><br><span class="line"><span class="xml">let imgUrl = websiteReg.exec(websiteCode)[1];</span></span><br></pre></td></tr></table></figure></p>
+          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = &lt;img id=s_lg_img src="(\S+)"/;</span><br><span class="line">let imgUrl = websiteReg.exec(websiteCode)[1];</span><br></pre></td></tr></table></figure></p>
 <p>其中imgUrl就是图片的链接地址，这样就可以利用正则表达式匹配出hostname和path，其正则表达式是：</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1458,149 +1593,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/02/05/Node基础-Promise/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lcina">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lcina的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/05/Node基础-Promise/" itemprop="url">Node基础 Promise</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T12:21:59+08:00">
-                2017-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/02/05/Node基础-Promise/" class="leancloud_visitors" data-flag-title="Node基础 Promise">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Promise 对象用于异步计算. 一个Promise对象代表一个值, 该值可以在当前或未来可用, 或永远不可用。<br>Promise对象有以下几种状态:</p>
-<blockquote>
-<ol>
-<li>pending: 初始状态, 既不是 fulfilled 也不是 rejected.</li>
-<li>fulfilled: 成功的操作.</li>
-<li>rejected: 失败的操作.</li>
-</ol>
-</blockquote>
-<p>以上描述均来自于MDN对Promise基础的解释，<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">链接地址</a>。<br>在看MDN对Promise的例子中同时学到了insertAdjacentHTML()这一接口，这个接口对于在元素之间DOM的插入非常的方便，但这里只是简单的介绍下，insertAdjacentHTML() 将指定的文本解析为HTML或XML，并将生成的节点插入到指定位置的DOM树中。语法使用：<br><code>element.insertAdjacentHTML(position, text);</code></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/05/Node基础-Promise/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1651,7 +1643,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

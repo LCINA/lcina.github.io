@@ -239,6 +239,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/07/25/基于React实现一个简单的颜色选择器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/基于React实现一个简单的颜色选择器/" itemprop="url">基于React实现一个简单的颜色选择器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T08:47:34+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/25/基于React实现一个简单的颜色选择器/" class="leancloud_visitors" data-flag-title="基于React实现一个简单的颜色选择器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>颜色选择器在日常开发中会经常使用到，例如Chrome自带的取色器、Photoshop颜色选择器等。对于<code>scratch3.0</code>中颜色展示块也存在着颜色选择器，但是在移动端体验上面很差，所以交互对这个颜色选择器进行了修改，变成了一个弹框，加上几种默认的颜色，这对于在移动端上面的体验也会变得很好，尤其是针对小朋友使用<code>scratch3.0</code>进行创作编程的时候。<br><img src="/2018/07/25/基于React实现一个简单的颜色选择器/scratch.jpg" alt=""><br>在<code>github</code>上面搜索了一些比较成熟的颜色选择器库，但发现对于这样一个简单的功能未免还是有点重了，有相当不错的库，比如<a href="!https://github.com/casesandberg/react-color">react-color</a>，这个库提供了相当丰富的选择器，例如Sketch、Photoshop、Chrome等颜色选择器，如果大家在开发中需要用到这类组件，可以试试casesandberg的库。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/25/基于React实现一个简单的颜色选择器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/07/16/web-worker简单使用教程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -320,15 +455,14 @@
 
       
         
-          
-            <p>Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——《<a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">Web Worker 使用教程</a>》<br>然后一些worker使用限制在该文章中也有提到，本文主要是通过一个简单的例子来讲讲web worker的使用。</p>
-<h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><p>在主线程中创建一个worker线程，<code>var worker = new Worker(&#39;./worker-example.js&#39;);</code>,通过主线程将数据传给worker；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.postMessage(&#123;</span><br><span class="line">    description: &apos;发送请求&apos;,</span><br><span class="line">    url: &apos;./data/1.json&apos;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>主线程通过<code>onmessage</code>函数监听，接收子进程返回的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">worker.onmessage = function (event) &#123;</span><br><span class="line">    console.log(&apos;Received message &apos; + event.data);</span><br><span class="line">    var codeEle = document.getElementsByTagName(&apos;code&apos;)[0];</span><br><span class="line">    if(Object.getOwnPropertyNames(event.data).length) &#123;</span><br><span class="line">        codeEle.innerHTML = event.data;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        codeEle.innerHTML = &apos;未收到数据&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    worker.terminate(); //通过主进程关闭worker</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="worker线程"><a href="#worker线程" class="headerlink" title="worker线程"></a>worker线程</h2><p>worker通过<code>message</code>函数监听主线程发送过来的数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">self.addEventListener(&apos;message&apos;, function (e) &#123;</span><br><span class="line">  var data = e.data;</span><br><span class="line">  var url = data.url;</span><br><span class="line">  request(&#123;</span><br><span class="line">    url: url</span><br><span class="line">  &#125;).then(data =&gt; &#123;</span><br><span class="line">    self.postMessage(&apos;原始数据:\n &apos; + data);</span><br><span class="line">    self.close();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure></p>
-<p>这样一个简单的web worker例子就完成了。</p>
-<p>例子地址：<a href="https://github.com/LCINA/-web-worker-" target="_blank" rel="noopener">https://github.com/LCINA/-web-worker-</a></p>
-
-          
+          <p>Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。——《<a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">Web Worker 使用教程</a>》<br>然后一些worker使用限制在该文章中也有提到，本文主要是通过一个简单的例子来讲讲web worker的使用。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/16/web-worker简单使用教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1450,141 +1584,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/10/17/Css实现容器水平垂直居中/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lcina">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lcina的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/17/Css实现容器水平垂直居中/" itemprop="url">Css实现容器水平垂直居中</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T14:35:59+08:00">
-                2017-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/17/Css实现容器水平垂直居中/" class="leancloud_visitors" data-flag-title="Css实现容器水平垂直居中">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>对于css实现水平垂直居中的方法，在前端开发中涉及的也比较多，在开发中经常使用的是flex布局以及绝对定位来实现居中方式，其实懂个三四种实现方式已经足够，但是这里将这些方法总结一下，这里只包括容器水平垂直居中的总结，可能不适用于图片文字等，图片字体的垂直居中其实也可以在下面的方法找到解决方式。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/17/Css实现容器水平垂直居中/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1635,7 +1634,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

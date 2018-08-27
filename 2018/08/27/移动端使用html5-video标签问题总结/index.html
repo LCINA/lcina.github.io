@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下： 1234567891011/* ios WKWebView">
+<meta name="description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下：">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="移动端使用html5 video标签问题总结">
 <meta property="og:url" content="http://lcina.github.io/2018/08/27/移动端使用html5-video标签问题总结/index.html">
 <meta property="og:site_name" content="Lcina的博客">
-<meta property="og:description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下： 1234567891011/* ios WKWebView">
+<meta property="og:description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-27T06:17:05.000Z">
+<meta property="og:updated_time" content="2018-08-27T06:18:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端使用html5 video标签问题总结">
-<meta name="twitter:description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下： 1234567891011/* ios WKWebView">
+<meta name="twitter:description" content="1、解决在webview视频无法自动播放问题。由于浏览器的限制，在webview中使用video标签，使用了autoplay属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下：">
 
 
 
@@ -329,8 +329,7 @@
       
 
       
-        <p>1、解决在webview视频无法自动播放问题。<br>由于浏览器的限制，在webview中使用<code>video</code>标签，使用了<code>autoplay</code>属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* ios WKWebView */</span><br><span class="line">WKWebViewConfiguration* conf = [[WKWebViewConfiguration alloc]init];</span><br><span class="line">    if (@available(iOS 9.0, *)) &#123;</span><br><span class="line">        conf.requiresUserActionForMediaPlayback = NO;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        conf.mediaPlaybackRequiresUserAction = NO;</span><br><span class="line">    &#125;</span><br><span class="line">[conf.preferences setValue:@(YES) forKey:@&quot;allowFileAccessFromFileURLs&quot;];</span><br><span class="line"></span><br><span class="line">/* Android WKWebView */</span><br><span class="line">webView.getSettings().setMediaPlaybackRequiresUserGesture(false);</span><br></pre></td></tr></table></figure>
+        <p>1、解决在webview视频无法自动播放问题。<br>由于浏览器的限制，在webview中使用<code>video</code>标签，使用了<code>autoplay</code>属性，发现无法实现自动播放的需求，但是这个限制后面应该是解除了，不过针对的貌似是本地视频的自动播放，也就是说如果你播放的是本地视频，可以实现自动播放。那通过线上链接访问视频肯定需要原生端配置一些参数的，具体配置如下：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* ios WKWebView */</span><br><span class="line">WKWebViewConfiguration* conf = [[WKWebViewConfiguration alloc]init];</span><br><span class="line">    if (@available(iOS 9.0, *)) &#123;</span><br><span class="line">        conf.requiresUserActionForMediaPlayback = NO;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        conf.mediaPlaybackRequiresUserAction = NO;</span><br><span class="line">    &#125;</span><br><span class="line">[conf.preferences setValue:@(YES) forKey:@&quot;allowFileAccessFromFileURLs&quot;];</span><br><span class="line"></span><br><span class="line">/* Android WKWebView */</span><br><span class="line">webView.getSettings().setMediaPlaybackRequiresUserGesture(false);</span><br></pre></td></tr></table></figure></p>
 <p>2、ios视频自动播放禁用全屏问题。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/* 配置该参数 */</span><br><span class="line">conf.allowsInlineMediaPlayback = YES;</span><br><span class="line"></span><br><span class="line">/* 前端同时配置该属性 */</span><br><span class="line">&lt;video</span><br><span class="line">    src=&#123;item.contentUrl&#125;</span><br><span class="line">    poster=&#123;defaultPoster&#125;</span><br><span class="line">    muted</span><br><span class="line">    loop</span><br><span class="line">    autoPlay</span><br><span class="line">    webkit-playsinline=&quot;true&quot;</span><br><span class="line">    playsInline=&quot;true&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
 <p>3、一些ios设备上存在视频无法显示，手指触碰后显示问题。</p>

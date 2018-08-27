@@ -247,6 +247,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/11/08/今天打开博客发现503了，一脸懵逼/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/今天打开博客发现503了，一脸懵逼/" itemprop="url">今天打开博客发现503了，一脸懵逼</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T15:42:02+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/08/今天打开博客发现503了，一脸懵逼/" class="leancloud_visitors" data-flag-title="今天打开博客发现503了，一脸懵逼">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>有一个星期没打开自己的博客了，这星期搞了些二级域名，没看主站，所以今天想登陆后台看看，发现503了，懵逼中…错误可以看下面的图。<br><img src="/2017/11/08/今天打开博客发现503了，一脸懵逼/282-1.png" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/08/今天打开博客发现503了，一脸懵逼/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/10/17/Css实现容器水平垂直居中/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1423,147 +1558,11 @@
 
       
         
-          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = <span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">s_lg_img</span> <span class="attr">src</span>=<span class="string">"(\S+)"</span>/;</span></span></span><br><span class="line"><span class="xml">let imgUrl = websiteReg.exec(websiteCode)[1];</span></span><br></pre></td></tr></table></figure></p>
+          <p>上一篇文章中可以获取到了百度首页的代码，接下来就是找到对应的Logo，然后将他下载下来。其实很简单，拿到图片的路径，然后进行请求，获取到二进制数据，将其转换为Buffer类型，然后存到对应的本地路径，完成下载。<br>可以去百度首页，检查元素，看看那张图片对应的id，也就是说利用正则表达式，匹配百度代码中对应的id，然后进行分组，获取对应图片的路径，简单写了下匹配id的正则表达式，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> websiteReg = &lt;img id=s_lg_img src="(\S+)"/;</span><br><span class="line">let imgUrl = websiteReg.exec(websiteCode)[1];</span><br></pre></td></tr></table></figure></p>
 <p>其中imgUrl就是图片的链接地址，这样就可以利用正则表达式匹配出hostname和path，其正则表达式是：</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/02/21/Node下载百度首页Logo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/02/21/Node获取百度首页代码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Lcina">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lcina的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/02/21/Node获取百度首页代码/" itemprop="url">Node获取百度首页代码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-21T19:29:02+08:00">
-                2017-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/02/21/Node获取百度首页代码/" class="leancloud_visitors" data-flag-title="Node获取百度首页代码">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上星期用node做了几个简单的小例子，其中发现了很多问题，但其实是一些注意就能避免的问题，解决问题的思路：遇到错误，命令行打出日志，看看错误信息；查看官方API文档，看看是否调用出错；谷歌搜索问题解决方法。<br>首先讲下怎样获取百度首页代码，百度首页启用了https，所以用node里的https；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const https = require(&apos;https&apos;);</span><br></pre></td></tr></table></figure></p>
-<p>接下来进行请求，获取百度首页的二进制文件数据，然后再转换为utf8；代码如下：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/21/Node获取百度首页代码/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1651,7 +1650,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

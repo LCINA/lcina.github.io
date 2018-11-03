@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原文链接：https://cssanimation.rocks/spheres/ 使用border-radius属性，我们可以实现带圆角的形状和圆形。可以添加一些渐变效果来使他们变成圆球。让我们尝试一下，并且可以添加一些动画效果来赋予他们活力。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译] Spheres">
+<meta property="og:url" content="http://lcina.github.io/2018/11/03/译-Spheres/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="原文链接：https://cssanimation.rocks/spheres/ 使用border-radius属性，我们可以实现带圆角的形状和圆形。可以添加一些渐变效果来使他们变成圆球。让我们尝试一下，并且可以添加一些动画效果来赋予他们活力。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166d8d8462b57002?w=449&h=449&f=png&s=24957">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166d8ddc3934881f?w=1196&h=211&f=png&s=81593">
+<meta property="og:updated_time" content="2018-11-03T10:04:00.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[译] Spheres">
+<meta name="twitter:description" content="原文链接：https://cssanimation.rocks/spheres/ 使用border-radius属性，我们可以实现带圆角的形状和圆形。可以添加一些渐变效果来使他们变成圆球。让我们尝试一下，并且可以添加一些动画效果来赋予他们活力。">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/11/3/166d8d8462b57002?w=449&h=449&f=png&s=24957">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+  (function(){
+    if(''){
+      if (prompt('请输入文章密码') !== ''){
+          alert('密码错误！');
+          history.back();
+      }
+    }
+  })();
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2018/11/03/译-Spheres/">
+
+
+
+
+
+  <title>[译] Spheres | Lcina的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?afe5ccc67e80010f408dc44bbb72d0b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/11/03/译-Spheres/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[译] Spheres</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T18:03:17+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/03/译-Spheres/" class="leancloud_visitors" data-flag-title="[译] Spheres">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="https://cssanimation.rocks/spheres/" target="_blank" rel="noopener">https://cssanimation.rocks/spheres/</a></p>
+<p>使用<code>border-radius</code>属性，我们可以实现带圆角的形状和圆形。可以添加一些渐变效果来使他们变成圆球。让我们尝试一下，并且可以添加一些动画效果来赋予他们活力。<br><a id="more"></a></p>
+<h2 id="平面设计"><a href="#平面设计" class="headerlink" title="平面设计"></a>平面设计</h2><p>我们可以通过两种方式用css来制作圆球。</p>
+<p>第一种方式是通过使用大量元素来创建一个真正的3D球体。这种方式存在的缺点就是需要浏览器渲染许多元素，从而可能会影响性能。由于一个平滑的球体需要用到很多元素，所以看起来有点粗糙[应该是想表达想画一个平滑球体，需要特别多的元素来填补，不然看起来不光滑？]</p>
+<p>相反地我会尝试第二种方式，利用css渐变来添加阴影，以及在一个单元素上添加3D效果。</p>
+<h2 id="例子和源码"><a href="#例子和源码" class="headerlink" title="例子和源码"></a>例子和源码</h2><p>所有在文章中提到的例子可以通过<a href="http://codepen.io/donovanh" target="_blank" rel="noopener">我的codepen账户</a>找到，或者在文章中每个事例中选择“Edit on Codepen”查看源码。</p>
+<p>在代码示例中，我没有添加任何浏览器前缀[css前缀]。我推荐使用像<a href="http://css-tricks.com/autoprefixer/" target="_blank" rel="noopener">Autoprefixer</a>这样的给工具，或者根据自己的需要添加相应的前缀。</p>
+<h2 id="基本形状"><a href="#基本形状" class="headerlink" title="基本形状"></a>基本形状</h2><p>在添加细节前，我们先创建一个最基本的圆形。</p>
+<p>从HTML开始：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;figure class=&quot;circle&quot;&gt;&lt;/figure&gt;</span><br></pre></td></tr></table></figure>
+<p>这里我们使用<code>figure</code>元素，但你也可以使用其他元素。<code>figure</code>是HTML5中用于表示图像或图表的元素，它是内容的一部分，可以在不影响内容含义的情况下删除。</p>
+<p>通过<code>figure</code>元素来创建一个圆，我会给它设置宽高，并且设置<code>border-radius</code>为50%。任何形状只要设置<code>border-radius</code>超过50%，都会变成圆形。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.circle &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  background: black;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  height: 300px;</span><br><span class="line">  width: 300px;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个圆形的展示。</p>
+<iframe height="265" scrolling="no" title="Spheres tutorial: 1. Circle" src="//codepen.io/donovanh/embed/sdLhc/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">See the Pen <a href="https://codepen.io/donovanh/pen/sdLhc/" target="_blank" rel="noopener">Spheres tutorial: 1. Circle</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.<br></iframe>
+
+<p>现在我们有了一个最基础的圆形，我们可以开始美化它，让它看起来更像个球形。</p>
+<h2 id="Shading-101"><a href="#Shading-101" class="headerlink" title="Shading 101"></a>Shading 101</h2><p>大部分3D球体教程所做的第一件事就是添加一个简单的径向渐变，稍微位置向上以及靠圆心的左侧。</p>
+<p>我们可以通过css来做到这一点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.circle &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  background: black;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  height: 300px;</span><br><span class="line">  width: 300px;</span><br><span class="line">  margin: 0;</span><br><span class="line">  background: radial-gradient(circle at 100px 100px, #5cabff, #000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你应该可以看到像这样的效果：</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="zDqAs" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 1.b Circle + basic shading" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/zDqAs/" target="_blank" rel="noopener">Spheres tutorial: 1.b Circle + basic shading</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="径向渐变"><a href="#径向渐变" class="headerlink" title="径向渐变"></a>径向渐变</h2><p><code>radial-gradient</code>属性需要配置一些参数。第一个参数是渐变开始的中心位置。根据<code>*shape* at *position*</code>这种格式。在上个例子中，渐变形状是<code>circle</code>，它的中心位置离左侧100px，离顶部100px。</p>
+<p>接下来是设置一系列颜色。你可以指定两种颜色以上，但必须在每个颜色之间添加一个距离，可以让渐变知道何时将每个颜色过渡到它的下个颜色。</p>
+<p>在这个例子中指定了两种颜色，这让浏览器默认第一个颜色从0%开始，第二个颜色为100%结束，在这两个颜色间绘制过渡效果。假如我们想改变渐变中的其他步骤，可以指定距离，用像素或者百分比来表示，在接下来的描述中可以看到。</p>
+<p>我们有一个看起来有点像3D的东西，看起来很棒，但让我们尝试着让它看起来更好一些。</p>
+<h2 id="Shadows-amp-3D"><a href="#Shadows-amp-3D" class="headerlink" title="Shadows &amp; 3D"></a>Shadows &amp; 3D</h2><p>根据你应用于曲面的着色阴影，可以创建出不同的外观效果。首先，让我们设置一个场景来将球放在里面。</p>
+<p>在这里我们将用到更多的HTML元素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class=&quot;stage&quot;&gt;</span><br><span class="line">  &lt;figure class=&quot;ball&quot;&gt;&lt;span class=&quot;shadow&quot;&gt;&lt;/span&gt;&lt;/figure&gt;</span><br><span class="line">&lt;/section&gt;</span><br></pre></td></tr></table></figure>
+<p>类名为<code>ball</code>的标签里面包含了用来创建阴影效果<code>span</code>标签，而它被的父元素是<code>stage</code>div。当我们想要设置<code>perspective</code>和定位阴影时， 父元素<code>stage</code>div很有用，因为可以看起来更像是3D效果。</p>
+<p>给<code>stage</code>以及<code>shadow</code>添加样式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.stage &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin: 20px;</span><br><span class="line">  perspective: 1200px;</span><br><span class="line">  perspective-origin: 50% 50%;</span><br><span class="line">&#125;</span><br><span class="line">.ball .shadow &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);</span><br><span class="line">  transform: rotateX(90deg) translateZ(-150px);</span><br><span class="line">  z-index: -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，在上面示例中我没有添加相对于的css前缀，但在codepen示例中是包含的。在上面示例中我给<code>stage</code>div设置<code>perspective: 1200px</code>，<code>perspective</code>属性使具有三维位置变换的元素产生透视效果[大概意思应该是这个]。</p>
+<p>给<code>shadow</code>设置径向渐变<code>radial gradient</code>，然后使用<code>transform</code>属性来对其定位。在3D空间里，<code>transform</code>属性包括旋转[rorate]、缩放[scale]、移动[move]和倾斜[skew]。让<code>shadow</code>在x轴上旋转90度，z轴上向下偏移150px。</p>
+<p>由于我们在<code>stage</code>容器设置了<code>perspective</code>属性，所以<code>shadow</code>看起来像是一个拉伸的椭圆形，感觉像圆球的影子。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="pwGxn" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 2 Basic plus shadow" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/pwGxn/" target="_blank" rel="noopener">Spheres tutorial: 2 Basic plus shadow</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>它现在看起来比之前要好一点了，让我们为它添加更多的底纹效果。</p>
+<h2 id="Multiple-shaders"><a href="#Multiple-shaders" class="headerlink" title="Multiple shaders"></a>Multiple shaders</h2><p>现实中很少会看到只有一个角度发光的物体，因为光会反射到其他表面上，最终各种光源混合在一起。为了让这个球看起来更加真实，我们使用伪元素添加两个渐变，让它看起来更有光泽。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.ball &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  margin: 0;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  position: relative;</span><br><span class="line">  background: radial-gradient(circle at 50% 120%, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);</span><br><span class="line">&#125;</span><br><span class="line">.ball:before &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 1%;</span><br><span class="line">  left: 5%;</span><br><span class="line">  width: 90%;</span><br><span class="line">  height: 90%;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);</span><br><span class="line">  filter: blur(5px);</span><br><span class="line">  z-index: 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们设置了两个稍微复杂的渐变。</p>
+<p>第一个渐变是一种弱光效果应用在<code>ball</code>元素上，渐变的中心为50%、120%，使中心位置离开球表面。我这样做是使最后的颜色过渡看起来不要太生硬，从而展现出更加平滑的渐变效果。</p>
+<p>第二个渐变是位于球体顶部的高亮效果，宽高都为球体的90%。它位于球体顶部的中心，向外渐渐扩散，直到消失。</p>
+<p>我使用了<code>before</code>伪元素，而不是创建一个新元素去盖在球体上方。</p>
+<p>由于单纯使用该渐变会看起来比较生硬，所以我利用了<code>blur</code>效果去对其进行柔化，但目前该属性只有chrome和safari支持，但在未来其他浏览器中，它可能会发挥更大的作用。</p>
+<p>以上两个渐变的设置让球拥有更好的视觉效果：</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="fEaru" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 3 Better shading" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/fEaru/" target="_blank" rel="noopener">Spheres tutorial: 3 Better shading</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Shinier"><a href="#Shinier" class="headerlink" title="Shinier"></a>Shinier</h2><p>现在球看起来效果非常柔和，所以接下来我们添加一些光泽，让它看起来更像一个斯诺克球。</p>
+<p>为达到这个效果，我们同样添加柔和的光线，但要将顶部的高光效果调整的更小以及更锐利。我们需要使用两个伪选择器覆盖在球颜色上，一个底部的高光渐变，一个反射光效果渐变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">.ball &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  margin: 0;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  position: relative;</span><br><span class="line">  background: radial-gradient(circle at 50% 120%, #323232, #0a0a0a 80%, #000000 100%);</span><br><span class="line">&#125;</span><br><span class="line">.ball:before &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  position: absolute;</span><br><span class="line">  background: radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  bottom: 2.5%;</span><br><span class="line">  left: 5%;</span><br><span class="line">  opacity: 0.6;</span><br><span class="line">  height: 100%;</span><br><span class="line">  width: 90%;</span><br><span class="line">  filter: blur(5px);</span><br><span class="line">  z-index: 2;</span><br><span class="line">&#125;</span><br><span class="line">.ball:after &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 5%;</span><br><span class="line">  left: 10%;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) 14%, rgba(255, 255, 255, 0) 24%);</span><br><span class="line">  transform: translateX(-80px) translateY(-90px) skewX(-20deg);</span><br><span class="line">  filter: blur(10px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们设置微弱的渐变效果应用在球上面，<code>before</code>伪元素包含一个较亮的高光，它也从球的底部开始，并产生来自表面的反射光的效果。</p>
+<p>这里加了个新的伪元素<code>after</code>，它是一个圆形渐变效果，从中心位置<code>50% 50%</code>渐变，并在24％左右的标记处渐变为透明。这个渐变产生了白色反光的效果，但为了让它看起来更像是一个反射光，我们设置了<code>transform</code>来调整它的位置。</p>
+<p>设置<code>transform</code>属性，往左移动80px，往上移动90px，并且设置了倾斜效果，往x轴倾斜拉伸，使其看起来更像是球反射出的光泽。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="LuEAB" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 4 Shinier" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/LuEAB/" target="_blank" rel="noopener">Spheres tutorial: 4 Shinier</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="8-ball"><a href="#8-ball" class="headerlink" title="8-ball"></a>8-ball</h2><p>让我们继续添加数字8，看起来更像是一个台球。</p>
+<p>我们需要一个额外的元素来增加数字8，以及设置其样式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class=&quot;stage&quot;&gt;</span><br><span class="line">  &lt;figure class=&quot;ball&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;shadow&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;eight&quot;&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/figure&gt;</span><br><span class="line">&lt;/section&gt;</span><br><span class="line"></span><br><span class="line">.ball .eight &#123;</span><br><span class="line">  width: 110px;</span><br><span class="line">  height: 110px;</span><br><span class="line">  margin: 30%;</span><br><span class="line">  background: white;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  transform: translateX(68px) translateY(-60px) skewX(15deg) skewY(2deg);</span><br><span class="line">  position: absolute;</span><br><span class="line">&#125;</span><br><span class="line">.ball .eight:before &#123;</span><br><span class="line">  content: &quot;8&quot;;</span><br><span class="line">  display: block;</span><br><span class="line">  position: absolute;</span><br><span class="line">  text-align: center;</span><br><span class="line">  height: 80px;</span><br><span class="line">  width: 100px;</span><br><span class="line">  left: 50px;</span><br><span class="line">  margin-left: -40px;</span><br><span class="line">  top: 44px;</span><br><span class="line">  margin-top: -40px;</span><br><span class="line">  color: black;</span><br><span class="line">  font-family: Arial;</span><br><span class="line">  font-size: 90px;</span><br><span class="line">  line-height: 104px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次利用<code>border-radius</code>创建圆<code>eight</code>，并设置<code>transdform</code>属性将该元素定位在右上角。这里我使用<code>before</code>伪元素将数字8添加到<code>content</code>，然后以类似的方式来调整该数字的位置。</p>
+<p>一个带光泽的8号台球。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="nzmJq" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 4.b 8-ball" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/nzmJq/" target="_blank" rel="noopener">Spheres tutorial: 4.b 8-ball</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Got-my-eye-on-you"><a href="#Got-my-eye-on-you" class="headerlink" title="Got my eye on you"></a>Got my eye on you</h2><p>css的<code>transform</code>的一大优点就是可以被应用在动画上面，将css<code>keyframes</code>关键帧用于动画，可以将一系列元素变换作为动画应用在元素上。我将制作一个会动的眼球。</p>
+<p>首先是调整示例8-ball中使用的一些颜色，细微的调整让它看起来更像是个眼睛。HTML代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;section class=&quot;stage&quot;&gt;</span><br><span class="line">  &lt;figure class=&quot;ball&quot;&gt;</span><br><span class="line">    &lt;span class=&quot;shadow&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &lt;span class=&quot;iris&quot;&gt;&lt;/span&gt;</span><br><span class="line">  &lt;/figure&gt;</span><br><span class="line">&lt;/section&gt;</span><br></pre></td></tr></table></figure>
+<p>除了虹膜和瞳孔样式之外，其他css样式大部分类似于示例8-ball。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">.iris &#123;</span><br><span class="line">  width: 40%;</span><br><span class="line">  height: 40%;</span><br><span class="line">  margin: 30%;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  background: radial-gradient(circle at 50% 50%, #208ab4 0%, #6fbfff 30%, #4381b2 100%);</span><br><span class="line">  transform: translateX(68px) translateY(-60px) skewX(15deg) skewY(2deg);</span><br><span class="line">  position: absolute;</span><br><span class="line">  animation: move-eye-skew 5s ease-out infinite;</span><br><span class="line">&#125;</span><br><span class="line">.iris:before &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  display: block;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 37.5%;</span><br><span class="line">  height: 37.5%;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  top: 31.25%;</span><br><span class="line">  left: 31.25%;</span><br><span class="line">  background: black;</span><br><span class="line">&#125;</span><br><span class="line">.iris:after &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  display: block;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 31.25%;</span><br><span class="line">  height: 31.25%;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  top: 18.75%;</span><br><span class="line">  left: 18.75%;</span><br><span class="line">  background: rgba(255, 255, 255, 0.2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>蓝色渐变形成虹膜的彩色部分，而瞳孔和高光效果使用伪元素进行创建，我还将动画属性<code>animation</code>应用到<code>iris</code>元素，设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation: animation-name 5s ease-out infinite;</span><br></pre></td></tr></table></figure>
+<p>在该例子中，设置了一个名为“animation-name”的动画，时间设置为5秒，无限循环，并设置其缓动效果为<code>ease-out</code>。<code>ease-out</code>指动画在快结束时速度变慢，从而达到更加自然的效果。</p>
+<p>在没有创建动画情况下，我们看到一个不会动的眼球。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="nwsqa" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 5 Eyeball" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/nwsqa/" target="_blank" rel="noopener">Spheres tutorial: 5 Eyeball</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>让我们创建关键帧<code>keyframes</code>来描述眼球应该如何移动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@keyframes move-eye-skew &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    transform: none;</span><br><span class="line">  &#125;</span><br><span class="line">  20% &#123;</span><br><span class="line">    transform: translateX(-68px) translateY(30px) skewX(15deg) skewY(-10deg) scale(0.95);</span><br><span class="line">  &#125;</span><br><span class="line">  25%, 44% &#123;</span><br><span class="line">    transform: none;</span><br><span class="line">  &#125;</span><br><span class="line">  50%, 60% &#123;</span><br><span class="line">    transform: translateX(68px) translateY(-40px) skewX(5deg) skewY(2deg) scaleX(0.95);</span><br><span class="line">  &#125;</span><br><span class="line">  66%, 100% &#123;</span><br><span class="line">    transform: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>css中的动画关键帧刚开始用起来可能会比较难，你正在做的是用一系列场景来展示元素的各个状态，每个状态对应一个百分比。在该示例中，<code>iris</code>从<code>transform: none</code>开始，在20%时，它设置了<code>iris</code>向左移动倾斜。浏览器会自动计算0～20%之间的差距，从而在两者之间进行平滑的过渡。</p>
+<p>就像前面说的，完成关键帧中设置的一系列场景需要5秒。</p>
+<p>不要忘记设置样式需要的前缀，因为有些浏览器存在兼容css样式问题。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="iBolr" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 5b Eyeball (animated)" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/iBolr/" target="_blank" rel="noopener">Spheres tutorial: 5b Eyeball (animated)</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Bubbles"><a href="#Bubbles" class="headerlink" title="Bubbles"></a>Bubbles</h2><p>动画和颜色渐变可以产生各种有趣多变的效果，比如气泡？</p>
+<p>创建气泡的外观与前面的例子类似，在主色调中将透明度调高，并使用俩个伪元素来增加光泽。</p>
+<p>设置动画使气泡动起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@keyframes bubble-anim &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    transform: scale(1);</span><br><span class="line">  &#125;</span><br><span class="line">  20% &#123;</span><br><span class="line">    transform: scaleY(0.95) scaleX(1.05);</span><br><span class="line">  &#125;</span><br><span class="line">  48% &#123;</span><br><span class="line">    transform: scaleY(1.1) scaleX(0.9);</span><br><span class="line">  &#125;</span><br><span class="line">  68% &#123;</span><br><span class="line">    transform: scaleY(0.98) scaleX(1.02);</span><br><span class="line">  &#125;</span><br><span class="line">  80% &#123;</span><br><span class="line">    transform: scaleY(1.02) scaleX(0.98);</span><br><span class="line">  &#125;</span><br><span class="line">  97%, 100% &#123;</span><br><span class="line">    transform: scale(1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>动画适用于整个气泡以及伪元素。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="pvrzK" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 6 Bubble (animated)" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/pvrzK/" target="_blank" rel="noopener">Spheres tutorial: 6 Bubble (animated)</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Using-images"><a href="#Using-images" class="headerlink" title="Using images"></a>Using images</h2><p>到目前为止，所有球都是在不使用任何图像的情况下创建的。背景图像可以添加更多的细节，并且仍然可以利用伪元素中的css着色。</p>
+<p><a href="http://hop.ie/balls/images/tennisball.png" target="_blank" rel="noopener">http://hop.ie/balls/images/tennisball.png</a><br><img src="https://user-gold-cdn.xitu.io/2018/11/3/166d8d8462b57002?w=449&amp;h=449&amp;f=png&amp;s=24957" alt=""></p>
+<p>添加些css渐变效果可以达到深度错觉。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="vsEIK" data-default-tab="css,result" data-user="donovanh" data-pen-title="Spheres tutorial: 7 Tennis ball" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/vsEIK/" target="_blank" rel="noopener">Spheres tutorial: 7 Tennis ball</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Around-the-world"><a href="#Around-the-world" class="headerlink" title="Around the world"></a>Around the world</h2><p>动画可以应用于背景图像的位置，使用它我们可以实现旋转地球仪效果。</p>
+<p>下面的平面图像在顶部和底部位置稍做拉伸用来作为背景图像。</p>
+<p><a href="http://hop.ie/balls/images/world-map-one-color.png" target="_blank" rel="noopener">http://hop.ie/balls/images/world-map-one-color.png</a><br><img src="https://user-gold-cdn.xitu.io/2018/11/3/166d8ddc3934881f?w=1196&amp;h=211&amp;f=png&amp;s=81593" alt=""></p>
+<p>通过添加阴影和动画，可以创建出3D效果的地球仪，可以在Codepen查看其运行结果。由于该示例的性能问题，我这里设置为默认显示HTML。</p>
+<p>ps: 非常感谢Sidoruk Sergey（<a href="http://twitter.com/Sidoruk_SV" target="_blank" rel="noopener">@Sidoruk_SV</a>）优化这个示例，看起来很棒。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="GBIiv" data-default-tab="css,result" data-user="donovanh" data-pen-title="Globe" class="codepen">See the Pen <a href="https://codepen.io/donovanh/pen/GBIiv/" target="_blank" rel="noopener">Globe</a> by Donovan Hutchinson (<a href="https://codepen.io/donovanh" target="_blank" rel="noopener">@donovanh</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h2><p>如果你想了解更多信息，请参考一些有关<code>radial gradients</code>的资料。</p>
+<p>想要找更多3D例子？查看<a href="https://cssanimation.rocks/portal/" target="_blank" rel="noopener">Portal CSS</a>获取更多。</p>
+<h2 id="Feedback"><a href="#Feedback" class="headerlink" title="Feedback"></a>Feedback</h2><p>所有的示例都可以在我的codepen找到。非常感谢Chris和团队提供的出色资源。</p>
+<p>如果您对上述内容有任何疑问，请通过<a href="mailto:hello@cssanimation.rocks" target="_blank" rel="noopener">电子邮件</a>或<a href="https://twitter.com/cssanimation" target="_blank" rel="noopener">Twitter</a>与我们联系。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/24/React-v16-6-0-新增点/" rel="next" title="React v16.6.0 新增点">
+                <i class="fa fa-chevron-left"></i> React v16.6.0 新增点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#平面设计"><span class="nav-number">1.</span> <span class="nav-text">平面设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子和源码"><span class="nav-number">2.</span> <span class="nav-text">例子和源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本形状"><span class="nav-number">3.</span> <span class="nav-text">基本形状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shading-101"><span class="nav-number">4.</span> <span class="nav-text">Shading 101</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#径向渐变"><span class="nav-number">5.</span> <span class="nav-text">径向渐变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadows-amp-3D"><span class="nav-number">6.</span> <span class="nav-text">Shadows &amp; 3D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-shaders"><span class="nav-number">7.</span> <span class="nav-text">Multiple shaders</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shinier"><span class="nav-number">8.</span> <span class="nav-text">Shinier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-ball"><span class="nav-number">9.</span> <span class="nav-text">8-ball</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Got-my-eye-on-you"><span class="nav-number">10.</span> <span class="nav-text">Got my eye on you</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bubbles"><span class="nav-number">11.</span> <span class="nav-text">Bubbles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-images"><span class="nav-number">12.</span> <span class="nav-text">Using images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Around-the-world"><span class="nav-number">13.</span> <span class="nav-text">Around the world</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Resources"><span class="nav-number">14.</span> <span class="nav-text">Resources</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feedback"><span class="nav-number">15.</span> <span class="nav-text">Feedback</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("8Cgz2ufsVnbtprMNRJQXoCT2-gzGzoHsz", "F3rba0mUEIw7dY8SeLRzd9Vq");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

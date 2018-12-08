@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="前端,">
+  <meta name="keywords" content="Lcina, Lcina的博客, 前端, 服务端, 移动端, Lcinb">
 
 
 
@@ -79,18 +79,14 @@
 
 
 
-<meta name="description" content="通常认为JavaScript代码是一句一句自上而下运行的，但事实是并非所有情况都是如此。《你不知道的JavaScript》书中，举了这么个例子，说明了代码执行并非都是自上而下的。123a = 2;var a;console.log( a ); 上述代码中，虽然a的声明在赋值之后，但控制台输出a的值并非为undefined,而是2。在来看下面的一段代码：12console.log( a );var">
-<meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript之声明提升">
-<meta property="og:url" content="http://lcina.github.io/2017/03/22/JavaScript之声明提升/index.html">
+<meta property="og:title" content="用于前端开发的webpack4配置[带注释]">
+<meta property="og:url" content="http://lcina.github.io/2018/12/08/用于前端开发的webpack4配置-带注释/index.html">
 <meta property="og:site_name" content="Lcina的博客">
-<meta property="og:description" content="通常认为JavaScript代码是一句一句自上而下运行的，但事实是并非所有情况都是如此。《你不知道的JavaScript》书中，举了这么个例子，说明了代码执行并非都是自上而下的。123a = 2;var a;console.log( a ); 上述代码中，虽然a的声明在赋值之后，但控制台输出a的值并非为undefined,而是2。在来看下面的一段代码：12console.log( a );var">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-13T06:35:11.000Z">
+<meta property="og:updated_time" content="2018-12-08T11:01:39.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript之声明提升">
-<meta name="twitter:description" content="通常认为JavaScript代码是一句一句自上而下运行的，但事实是并非所有情况都是如此。《你不知道的JavaScript》书中，举了这么个例子，说明了代码执行并非都是自上而下的。123a = 2;var a;console.log( a ); 上述代码中，虽然a的声明在赋值之后，但控制台输出a的值并非为undefined,而是2。在来看下面的一段代码：12console.log( a );var">
+<meta name="twitter:title" content="用于前端开发的webpack4配置[带注释]">
 
 
 
@@ -128,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://lcina.github.io/2017/03/22/JavaScript之声明提升/">
+  <link rel="canonical" href="http://lcina.github.io/2018/12/08/用于前端开发的webpack4配置-带注释/">
 
 
 
 
 
-  <title>JavaScript之声明提升 | Lcina的博客</title>
+  <title>用于前端开发的webpack4配置[带注释] | Lcina的博客</title>
   
 
 
@@ -251,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2017/03/22/JavaScript之声明提升/">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2018/12/08/用于前端开发的webpack4配置-带注释/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lcina">
@@ -268,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript之声明提升</h1>
+          <h1 class="post-title" itemprop="name headline">用于前端开发的webpack4配置[带注释]</h1>
         
 
         <div class="post-meta">
@@ -280,8 +276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-22T14:29:12+08:00">
-                2017-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T19:01:39+08:00">
+                2018-12-08
               </time>
             
 
@@ -298,7 +294,7 @@
 
           
           
-             <span id="/2017/03/22/JavaScript之声明提升/" class="leancloud_visitors" data-flag-title="JavaScript之声明提升">
+             <span id="/2018/12/08/用于前端开发的webpack4配置-带注释/" class="leancloud_visitors" data-flag-title="用于前端开发的webpack4配置[带注释]">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -329,17 +325,7 @@
       
 
       
-        <p>通常认为JavaScript代码是一句一句自上而下运行的，但事实是并非所有情况都是如此。《你不知道的JavaScript》书中，举了这么个例子，说明了代码执行并非都是自上而下的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log( a );</span><br></pre></td></tr></table></figure></p>
-<p>上述代码中，虽然a的声明在赋值之后，但控制台输出a的值并非为<code>undefined</code>,而是2。在来看下面的一段代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log( a );</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
-<p>这时候控制台输出的值其实是<code>undefined</code>，为什么呢？部分人可能会认为输出结果应该是报异常了，或者是结果为2，但这两种结果都是错误的，这里扯到了JavaScript的编译，书中提到：“<strong>正确的思考思路是，包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理</strong> ”。所以不管声明位于哪个位置，在代码执行时都要被首先处理，即声明提升，在上述代码中，对于语句<code>var a = 2</code>，JavaScript其实会把它拆解为<code>var a</code> 和 <code>a = 2</code>，其中<code>var a</code>定义声明会在编译阶段就被执行到[编译阶段]，而<code>a = 2</code>则留在原地等待被执行[执行阶段]，所以将上述代码拆解开来看，其实结果就很清晰了。<a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
-<p>针对声明提升，书中也给出了一些总结：“<strong>只有声明本身会被提升，而赋值或其他运行逻辑会留在原地。如果提升改变了代码执行的 顺序，会造成非常严重的破坏</strong> ”。上述声明提升属于变量声明提升，还有一种提升称为函数声明提升，可以参考下述代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( a ); <span class="comment">// undefined</span></span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>控制输出了结果，说明了调用成功，说明就算函数声明定义在函数被调用时的后面[这句话绕，相信你可以领悟的]，即<code>foo( )</code>位于函数声明之前，同样可以正常调用函数。书中还举了另一种例子，说明函数声明可以被提升，但是函数表达式并不可以被提升，可以参考下述代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 不是ReferenceError, 而是TypeError!</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这个例子说明虽然同样是函数，但存在不同，表达式并非可以做到提升，而函数声明可以做到。上述代码片段经过提升后，实际上会是以下这种形式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo;</span><br><span class="line">foo(); <span class="comment">// TypeError</span></span><br><span class="line">bar(); <span class="comment">// ReferenceError</span></span><br><span class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bar = ...self...</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>对于函数声明和变量声明，函数声明优先于变量声明，函数会首先被提升，然后才是变量，可以观察下述代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">var</span> foo;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">2</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果为1，说明函数声明的确是优于变量声明的。引擎会将上述代码理解为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line">foo(); <span class="comment">// 1</span></span><br><span class="line">foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">2</span> );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>还存在一种情况就是，后面的函数声明会将前面相同的函数声明覆盖掉，参考下述代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 3</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">1</span> );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">2</span> );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( <span class="number">3</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>书中给出的小结：“我们习惯将<code>var a = 2</code>;看作一个声明，而实际上JavaScript引擎并不这么认为。它将<code>var a</code>和<code>a = 2</code> 当作两个单独的声明，第一个是编译阶段的任务，而第二个则是执行阶段的任务。 这<strong>意味着无论作用域中的声明出现在什么地方，都将在代码本身被执行前首先进行处理</strong>。可以将这个过程形象地想象成所有的声明（变量和函数）都会被“移动”到各自作用域的最顶端，这个过程被称为提升。声明本身会被提升，而包括函数表达式的赋值在内的赋值操作并不会提升。 要注意避免重复声明，特别是当普通的var声明和函数声明混合在一起的时候，否则会引起很多危 险的问题！”。</p>
-
+        
       
     </div>
     
@@ -354,12 +340,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/前端/" rel="tag"># 前端</a>
-          
-        </div>
-      
 
       
       
@@ -369,8 +349,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/21/JavaScript的两种查询方式——LHS-RHS/" rel="next" title="JavaScript的两种查询方式——LHS & RHS">
-                <i class="fa fa-chevron-left"></i> JavaScript的两种查询方式——LHS & RHS
+              <a href="/2018/11/03/译-Spheres/" rel="next" title="[译] Spheres">
+                <i class="fa fa-chevron-left"></i> [译] Spheres
               </a>
             
           </div>
@@ -378,10 +358,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/24/JavaScript：闭包/" rel="prev" title="JavaScript：闭包">
-                JavaScript：闭包 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

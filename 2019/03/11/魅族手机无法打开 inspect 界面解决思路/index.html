@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Lcina的博客">
 <meta property="og:description" content="判断是不是没翻墙问题，验证发现已开启翻墙，仍然无法正常打开；   Windows 和 Mac 确认是否都无法正常打开，验证后发现确实都不可以；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1g0yzu0p3c7j31hc0u043d.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1g0yzuj314mj30xb0u0ak8.jpg">
-<meta property="og:updated_time" content="2019-05-16T10:30:09.560Z">
+<meta property="og:image" content="http://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg">
+<meta property="og:image" content="http://ws3.sinaimg.cn/large/006tKfTcgy1g0yzu0p3c7j31hc0u043d.jpg">
+<meta property="og:image" content="http://ws4.sinaimg.cn/large/006tKfTcgy1g0yzuj314mj30xb0u0ak8.jpg">
+<meta property="og:updated_time" content="2019-05-16T11:24:00.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="魅族手机无法打开 inspect 界面解决思路">
 <meta name="twitter:description" content="判断是不是没翻墙问题，验证发现已开启翻墙，仍然无法正常打开；   Windows 和 Mac 确认是否都无法正常打开，验证后发现确实都不可以；">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg">
+<meta name="twitter:image" content="http://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg">
 
 
 
@@ -348,14 +348,14 @@
 <p>getBoundingClientRect 获取到的对象，如 <code>width</code>、<code>height</code>、<code>x</code> 等，发现是无法对他们进行赋值处理的，不存在 set 方法，只有 get 方法。错误如下：<code>Cannot read property width of [object, object] which has only a getter</code>。 所以为了处理这一兼容问题，做了如下操作，从而在魅族这一报错就得到了解决。 </p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> flyoutArea = &#123;&#125;; </span><br><span class="line"><span class="keyword">const</span> flyoutRect = flyout_.svgGroup_.getBoundingClientRect(); </span><br><span class="line">flyoutArea = &#123; </span><br><span class="line">​	x: flyoutRect.x, </span><br><span class="line">​	y: flyoutRect.y, </span><br><span class="line">​	top: flyoutRect.top, </span><br><span class="line">​	right: flyoutRect.right, </span><br><span class="line">​	bottom: flyoutRect.bottom, </span><br><span class="line">​	left: flyoutRect.left, </span><br><span class="line">​	width: flyoutRect.width, </span><br><span class="line">​	height: flyoutRect.height </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg" alt="S90311-154941"></p>
+<p><img src="http://ws4.sinaimg.cn/large/006tKfTcgy1g0yztnc1nfj31hc0u0jyy.jpg" alt="S90311-154941"></p>
 <p>控制台抛出的错误 </p>
-<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1g0yzu0p3c7j31hc0u043d.jpg" alt="S90311-103120"></p>
+<p><img src="http://ws3.sinaimg.cn/large/006tKfTcgy1g0yzu0p3c7j31hc0u043d.jpg" alt="S90311-103120"></p>
 <p>获取到的 <code>Rect</code>，不存在 <code>set</code> 方法 </p>
 <blockquote>
 <p>解决完上述报错后，发现项目打开还是存在问题，加载扩展出问题了，eruda 并没有显示错误函数，只抛出了 <code>Unexpected token function</code> 这一句错误，没思路了，直接 google 一下寻求思路，大部分抛出该问题还是因为存在异步操作问题，那觉得应该是代码中存在着 <code>es6+</code> 语法导致不兼容，但是无法查看具体是哪一块出问题了，最后直接看看魅族自带的浏览器版本，发现是 <code>chrome 44.0.2403.146</code> 版本，搜一下该版本，只找到<code>windows</code>安装包，在虚拟机跑一下该版本，首先验证了 1）确实是存在获取到的 <code>DOMRect</code>无法赋值的情况，同样没有 <code>set</code> 方法，然后用该版本终于打开了 <code>inspect</code> 界面，可以看到所有的控制台信息，定位到了错误，原因是在添加扩展的时候，没有对扩展中的代码进行转码处理，导致兼容性问题。 </p>
 </blockquote>
-<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1g0yzuj314mj30xb0u0ak8.jpg" alt="图片"></p>
+<p><img src="http://ws4.sinaimg.cn/large/006tKfTcgy1g0yzuj314mj30xb0u0ak8.jpg" alt="图片"></p>
 
       
     </div>

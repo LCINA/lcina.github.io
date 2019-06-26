@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Lcina, Lcina的博客, 前端, 服务端, 移动端, Lcinb">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原文链接，点这里   Posted by Aman Khalid on May 30, 2019   Start on the board [从草图开始] Actions，数据源和 API Redux 集成 Dynamic UI at scale  本文将介绍构建大型 React 应用程序的步骤。在使用 React 创建单个页面应用程序时，代码库很容易变得杂乱无章。这导致了很难对应用程序进行调试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译] 构建大型 React 应用程序的最佳实践">
+<meta property="og:url" content="http://lcina.github.io/2019/06/15/译-构建大型-React-应用程序的最佳实践/index.html">
+<meta property="og:site_name" content="Lcina的博客">
+<meta property="og:description" content="原文链接，点这里   Posted by Aman Khalid on May 30, 2019   Start on the board [从草图开始] Actions，数据源和 API Redux 集成 Dynamic UI at scale  本文将介绍构建大型 React 应用程序的步骤。在使用 React 创建单个页面应用程序时，代码库很容易变得杂乱无章。这导致了很难对应用程序进行调试">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/12/16b4c0d80fd6381f?w=691&h=561&f=png&s=30563">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/12/16b4c167a3603021?w=750&h=632&f=png&s=460566">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/12/16b4c52475781490?w=761&h=331&f=png&s=64643">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/12/16b4c578580c62eb?w=761&h=331&f=png&s=29229">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/13/16b4c72e6b33dcdb?w=611&h=331&f=png&s=50788">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/14/16b569e45e21eeb0?w=29&h=33&f=png&s=1062">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/14/16b56a35fcf404ea?w=480&h=480&f=gif&s=65955">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/14/16b56aef1bb64c52?w=480&h=480&f=gif&s=246225">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/14/16b56b66decbd2c3?w=744&h=429&f=png&s=14600">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/15/16b56ba57bf39c94?w=362&h=44&f=png&s=2633">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/6/15/16b56bd94da10d53?w=502&h=107&f=png&s=11563">
+<meta property="og:updated_time" content="2019-06-26T03:43:27.978Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[译] 构建大型 React 应用程序的最佳实践">
+<meta name="twitter:description" content="原文链接，点这里   Posted by Aman Khalid on May 30, 2019   Start on the board [从草图开始] Actions，数据源和 API Redux 集成 Dynamic UI at scale  本文将介绍构建大型 React 应用程序的步骤。在使用 React 创建单个页面应用程序时，代码库很容易变得杂乱无章。这导致了很难对应用程序进行调试">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/6/12/16b4c0d80fd6381f?w=691&h=561&f=png&s=30563">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+  (function(){
+    if(''){
+      if (prompt('请输入文章密码') !== ''){
+          alert('密码错误！');
+          history.back();
+      }
+    }
+  })();
+</script>
+
+
+
+  <link rel="canonical" href="http://lcina.github.io/2019/06/15/译-构建大型-React-应用程序的最佳实践/">
+
+
+
+
+
+  <title>[译] 构建大型 React 应用程序的最佳实践 | Lcina的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?afe5ccc67e80010f408dc44bbb72d0b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lcina的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://lcina.github.io/2019/06/15/译-构建大型-React-应用程序的最佳实践/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lcina">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lcina的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[译] 构建大型 React 应用程序的最佳实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T11:42:49+08:00">
+                2019-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/06/15/译-构建大型-React-应用程序的最佳实践/" class="leancloud_visitors" data-flag-title="[译] 构建大型 React 应用程序的最佳实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原文链接，点<a href="https://buttercms.com/blog/best-practices-for-building-a-large-scale-react-application?utm_campaign=React%2BNewsletter&amp;utm_medium=rss&amp;utm_source=React_Newsletter_164#dynamicui" target="_blank" rel="noopener">这里</a></p>
+</blockquote>
+<blockquote>
+<p>Posted by Aman Khalid on May 30, 2019</p>
+</blockquote>
+<ol>
+<li>Start on the board [从草图开始]</li>
+<li>Actions，数据源和 API</li>
+<li>Redux 集成</li>
+<li>Dynamic UI at scale</li>
+</ol>
+<p>本文将介绍构建大型 React 应用程序的步骤。在使用 React 创建单个页面应用程序时，代码库很容易变得杂乱无章。这导致了很难对应用程序进行调试，甚至使更新或扩展代码库变得更加困难。<br><a id="more"></a></p>
+<p>在 React 生态系统中有很多不错的库可以用来管理应用程序的某些方面，本文将深入介绍其中的一些方面。除此之外，如果您考虑到可扩展性，它还列出了从项目开始就要遵循的一些良好实践。说到这一点，让我们迈出第一步 - 如何提前规划。</p>
+<h1 id="Start-on-the-board-从草图开始"><a href="#Start-on-the-board-从草图开始" class="headerlink" title="Start on the board [从草图开始]"></a>Start on the board [从草图开始]</h1><p>大多数情况下，开发者们都会习惯性跳过这一环节，因为它与实际编码无关，但它的重要性不容小觑，稍后您将明白为什么。</p>
+<h2 id="应用规划阶段-为什么这样做？"><a href="#应用规划阶段-为什么这样做？" class="headerlink" title="应用规划阶段 - 为什么这样做？"></a>应用规划阶段 - 为什么这样做？</h2><p>在开发软件时，开发者们必须面临许多存在变数的部分，很容易出现问题。既然有这么多的不确定性和障碍，所以不希望在这件事上面花费过多时间。这个问题在规划阶段可以避免出现，在这一阶段，你要写下应用程序的每一个细节。与在脑海中脑补整个过程相比，预测在你面前构建这些单独的小模块所需的时间，相比要容易得多。</p>
+<p>如果您有多个开发人员在这个大型项目中工作（您将会这样做），拥有这个文档将使彼此之间的沟通更加容易。实际上，可以将此文档中的内容分配给开发人员，这将使每个人更容易知道其他人在做什么。</p>
+<p>最后，由于有了这份文档，您会非常了解项目的进展。对于开发人员来说，从他们正在开发的应用程序某个功能（A）切换到另一个功能（B），并且要重新回到当前功能（A）开发，这其中需要的时间是比他们预期要晚很多的，这是情况非常常见。</p>
+<h2 id="Step-1-视图和组件"><a href="#Step-1-视图和组件" class="headerlink" title="Step 1: 视图和组件"></a>Step 1: 视图和组件</h2><p>我们需要确定应用内每个视图的外观和功能。最好的方法是使用<a href="https://moqups.com/" target="_blank" rel="noopener">模型工具</a>或在纸面上绘制应用程序的每个视图,这将使您很好地了解您确定在每个页面上拥有哪些信息和数据。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/12/16b4c0d80fd6381f?w=691&amp;h=561&amp;f=png&amp;s=30563" alt=""><br><a href="https://hackernoon.com/creating-awesome-spas-with-react-66b4e2043621" target="_blank" rel="noopener">资源</a></p>
+<p>在上面的模型中，您可以很容易地看到应用程序的父子容器。稍后，这些模型的父容器将是<strong>我们应用程序的页面</strong>，较小的部件将放在 component 文件夹中。绘制好模型后，在其中每个模型中写上页面和组件的名称。</p>
+<h2 id="Step-2-应用程序内的动作和事件"><a href="#Step-2-应用程序内的动作和事件" class="headerlink" title="Step 2: 应用程序内的动作和事件"></a>Step 2: 应用程序内的动作和事件</h2><p>在决定组件之后，规定好在每个组件中执行的操作。这些操作稍后将从这些组件中发出</p>
+<p>在一个电子商务网站，它的主屏幕上有一个特色产品列表，列表中的每一项都是项目中的一个单独组件，这些单独的组件被命名为 <strong>ListItem</strong>。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/12/16b4c167a3603021?w=750&amp;h=632&amp;f=png&amp;s=460566" alt=""></p>
+<p><a href="https://www.renogy.com/" target="_blank" rel="noopener">资源</a></p>
+<p>因此，在这个应用程序中，Product 部分组件执行的操作是 getItems。此页面上的其他一些操作可能包括 <em>getUserDetails</em>、<em>getSearchResults</em> 等。</p>
+<p>重点是观察每个组件的操作或用户与应用程序数据的交互。无论在何处<strong>修改，读取或删除</strong>数据，请注意每个页面的操作。</p>
+<h2 id="Step-3-数据和模型"><a href="#Step-3-数据和模型" class="headerlink" title="Step 3: 数据和模型"></a>Step 3: 数据和模型</h2><p>应用程序的每个组件都有一些与之关联的数据。如果应用程序的多个组件使用相同的数据，它将成为集中状态树的一部分。状态树将由 <a href="https://redux.js.org/" target="_blank" rel="noopener">redux</a> 管理。</p>
+<p>该数据被多个组件使用，因此当在某个组件对该数据进行更改时，其他组件也会进行数据更新。</p>
+<p>在应用程序中列出这些数据，因为这些数据将构成应用程序的模型，并根据这些值创建应用程序的 reducers。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">products: &#123;</span><br><span class="line">  productId: &#123;productId, productName, category, image, price&#125;,</span><br><span class="line">  productId: &#123;productId, productName, category, image, price&#125;,</span><br><span class="line">  productId: &#123;productId, productName, category, image, price&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>考虑上面的电子商务商店的例子。<em>feature section</em> 和 <em>new arrival section</em> 所使用的数据类型是相同的，即 product，这将是这个电子商务应用的一个 reducers 之一。</p>
+<p>在记录了您的操作计划之后，接下来的部分将介绍设置应用程序的数据层所需的一些细节。</p>
+<h1 id="Actions-Datasource-and-API"><a href="#Actions-Datasource-and-API" class="headerlink" title="Actions, Datasource and API"></a>Actions, Datasource and API</h1><p>随着应用程序的迭代开发，redux store 经常会有冗余的方法和不正确的目录结构，并且难以维护或更新。</p>
+<p>让我们看看如何重整一些东西以确保 redux store 的代码保持整洁。让模块从一开始就更具备可重用性，可以节省大量的麻烦，虽然刚开始做起来比较棘手。</p>
+<h2 id="API-设计和客户端应用程序"><a href="#API-设计和客户端应用程序" class="headerlink" title="API 设计和客户端应用程序"></a>API 设计和客户端应用程序</h2><p>在设置数据存储时，从 API 接收数据的格式对 store 的布局有很大的影响。通常，在将数据提供给 reducers 之前，需要对数据进行格式化。</p>
+<p>关于在设计 API 时应该做什么和不应该做什么，有很多<a href="https://www.moesif.com/blog/api-guide/api-design-guidelines/" target="_blank" rel="noopener">争论</a>。后端框架、应用程序大小等因素会进一步影响 API 的设计。</p>
+<p>就像在后端应用程序中一样，将格式化程序和映射程序等实用程序函数保存在单独的文件夹中，确保这些函数没有副作用 —— 参见 Javascript <a href="https://blog.bitsrc.io/understanding-javascript-mutation-and-pure-functions-7231cc2180d3" target="_blank" rel="noopener">纯函数</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">formatTweet</span> (<span class="params">tweet, author, authedUser, parentTweet</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; id, likes, replies, text, timestamp &#125; = tweet</span><br><span class="line">  <span class="keyword">const</span> &#123; name, avatarURL &#125; = author</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name,</span><br><span class="line">    id,</span><br><span class="line">    timestamp,</span><br><span class="line">    text,</span><br><span class="line">    avatar: avatarURL,</span><br><span class="line">    likes: likes.length,</span><br><span class="line">    replies: replies.length,</span><br><span class="line">    hasLiked: likes.includes(authedUser),</span><br><span class="line">    parent: !parentTweet ? <span class="literal">null</span> : &#123;</span><br><span class="line">      author: parentTweet.author,</span><br><span class="line">      id: parentTweet.id,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码片段中，<code>formatTweet</code> 函数向前端应用程序的 tweet 对象插入一个新的 key parent，并根据参数返回数据，而不影响外部数据。</p>
+<p>您可以将数据映射到一个预定义的对象，该对象的结构特定于您的前端应用程序，并且对某些键进行验证，从而进一步实现这一点。我们来谈谈负责进行 <a href="https://buttercms.com/blog/webhook-vs-api-whats-the-difference" target="_blank" rel="noopener">API 调用</a>的部分。</p>
+<h2 id="Datasource-design-patterns"><a href="#Datasource-design-patterns" class="headerlink" title="Datasource design patterns"></a>Datasource design patterns</h2><p>我在本节中描述的部分将通过 redux actions 去修改状态。根据应用程序的大小（以及您拥有的时间），您可以通过以下两种方式之一去存储数据。</p>
+<ul>
+<li>Without Courier</li>
+<li>With Courier</li>
+</ul>
+<h3 id="Without-Courier"><a href="#Without-Courier" class="headerlink" title="Without Courier"></a>Without Courier</h3><p>以这种方式存储数据需要为每个模型分别定义 GET、POST 和 PUT 请求。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/12/16b4c52475781490?w=761&amp;h=331&amp;f=png&amp;s=64643" alt=""></p>
+<p>在上图中，每个组件分派调用不同数据存储方法的操作，这就是 BlogApi 文件的 <code>updateBlog</code> 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateBlog</span>(<span class="params">blog</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">let</span> blog_object = <span class="keyword">new</span> BlogModel(blog) </span><br><span class="line">   axios.put(<span class="string">'/blog'</span>, &#123; ...blog_object &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方法可以节省时间……首先，它还允许您进行修改，而不必过多担心副作用，但会有很多冗余代码，执行批量更新非常耗时。</p>
+<h3 id="With-Courier"><a href="#With-Courier" class="headerlink" title="With Courier"></a>With Courier</h3><p>从长远来看，这种方法使维护或更新变得更容易，使代码库保持整洁，这样就省去了通过 axios 进行重复调用的麻烦。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/12/16b4c578580c62eb?w=761&amp;h=331&amp;f=png&amp;s=29229" alt=""></p>
+<p>然而，这种方法需要时间来进行初始设置，而且对你而言，灵活性比较低。这是一把双刃剑，因为它阻止你做一些不寻常的事情。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">courier</span>(<span class="params">query, payload</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">let</span> path = <span class="string">`<span class="subst">$&#123;SITE_URL&#125;</span>`</span>;</span><br><span class="line">   path += <span class="string">`/<span class="subst">$&#123;query.model&#125;</span>`</span>;</span><br><span class="line">   <span class="keyword">if</span> (query.id) path += <span class="string">`/<span class="subst">$&#123;query.id&#125;</span>`</span>;</span><br><span class="line">   <span class="keyword">if</span> (query.url) path += <span class="string">`/<span class="subst">$&#123;query.url&#125;</span>`</span>;</span><br><span class="line">   <span class="keyword">if</span> (query.var) path += <span class="string">`?<span class="subst">$&#123;QueryString.stringify(query.<span class="keyword">var</span>)&#125;</span>`</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">return</span> axios(&#123; <span class="attr">url</span>: path, ...payload &#125;)</span><br><span class="line">     .then(<span class="function"><span class="params">response</span> =&gt;</span> response)</span><br><span class="line">     .catch(<span class="function"><span class="params">error</span> =&gt;</span> (&#123; error &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是一个基本的 courier 方法，所有的 API 处理程序都可以简单地调用它，通过传递以下变量:</p>
+<ul>
+<li>查询对象，该对象将包含与 URL 相关的详细信息，如模型的名称、查询字符串等。</li>
+<li>Payload，包含请求头和主体。</li>
+</ul>
+<h2 id="API-调用和应用程序内操作"><a href="#API-调用和应用程序内操作" class="headerlink" title="API 调用和应用程序内操作"></a>API 调用和应用程序内操作</h2><p>在使用 redux 时，有一点很突出，那就是使用预定义的操作，它使得整个应用程序中的数据变化更加可预测。</p>
+<p>尽管在一个大型应用程序中定义一堆常量看起来要做很多工作，但是规划阶段的 Step 2 使它变得更加容易。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> BOOK_ACTIONS = &#123;</span><br><span class="line">   GET:<span class="string">'GET_BOOK'</span>,</span><br><span class="line">   LIST:<span class="string">'GET_BOOKS'</span>,</span><br><span class="line">   POST:<span class="string">'POST_BOOK'</span>,</span><br><span class="line">   UPDATE:<span class="string">'UPDATE_BOOK'</span>,</span><br><span class="line">   DELETE:<span class="string">'DELETE_BOOK'</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createBook</span>(<span class="params">book</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      type: BOOK_ACTIONS.POST,</span><br><span class="line">    	book</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">handleCreateBook</span> (<span class="params">book</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> createBookAPI(book)</span><br><span class="line">         .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(createBook(book))</span><br><span class="line">         &#125;)</span><br><span class="line">         .catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.warn(<span class="string">'error in creating book'</span>, e);</span><br><span class="line">            alert(<span class="string">'Error Creating book'</span>)</span><br><span class="line">         &#125;)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">   handleCreateBook,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码片段显示了一种简单的方法，可以将我们的数据源 createBookAPI 的方法与redux actions 混合在一起。 handleCreateBook 方法可以安全地传递给 redux 的 dispatch 方法。</p>
+<p>另外，请注意上面的代码位于项目的 actions 目录中，我们同样可以为应用程序的其他各种模型创建包含操作名称和处理程序的 javascript 文件。</p>
+<h1 id="Redux-集成"><a href="#Redux-集成" class="headerlink" title="Redux 集成"></a>Redux 集成</h1><p>在本节中，我将系统地讨论如何扩展 redux 的功能来处理更复杂的应用程序操作。如果实现得不好，这些东西可能会打破 store 的模式。</p>
+<p>Javascript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*" target="_blank" rel="noopener">generator 函数</a>能够解决与异步编程相关的许多问题，因为它们可以随意启动和停止。Redux Sagas 中间件使用这个概念来管理应用程序的非纯方面。</p>
+<h2 id="管理应用程序的不纯方面"><a href="#管理应用程序的不纯方面" class="headerlink" title="管理应用程序的不纯方面"></a>管理应用程序的不纯方面</h2><p>考虑这样一个场景。你被要求开发一个 real-estate discovery 应用程序。客户想要迁移到一个新的更好的网站。REST API 已经就绪，您已经获得了 Zapier 上每个页面的设计，并且已经起草了一个计划，但灾难仍然存在。</p>
+<p>CMS 客户端已经在他们的公司使用了很长时间，他们非常熟悉它，因此不希望仅仅为了写博客而更换一个新的客户端。此外，复制所有旧博客将是一件麻烦事。</p>
+<p>幸运的是，CMS 有一个可读的 API ，可以提供博客内容。不幸的是，如果您编写了一个 courier，那么 <a href="https://buttercms.com/docs/api/" target="_blank" rel="noopener">CMS API</a> 位于另一个具有不同语法的服务器上。</p>
+<p>这是应用程序的一个不纯方面，因为您正在使用一个用于简单获取博客的新 API，这可以通过使用React Sagas来处理。</p>
+<p>考虑下图。我们使用 Sagas 从后台获取博客。这就是整个交互的逻辑。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/13/16b4c72e6b33dcdb?w=611&amp;h=331&amp;f=png&amp;s=50788" alt=""></p>
+<p>这里，组件执行分派操作 GET。博客和使用 redux 中间件的应用程序中的请求将被拦截，在后台，您的生成器函数将从数据存储中获取数据并更新 redux。</p>
+<p>下面是一个示例，展示了博客 sagas 的生成器函数是什么样子的。您还可以使用 sagas 存储用户数据(例如auth令牌)，因为这是另一个不纯操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">fetchPosts</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (action.type === WP_POSTS.LIST.REQUESTED) &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">     <span class="keyword">const</span> response = <span class="keyword">yield</span> call(wpGet, &#123;</span><br><span class="line">       model: WP_POSTS.MODEL,</span><br><span class="line">       contentType: APPLICATION_JSON,</span><br><span class="line">       query: action.payload.query,</span><br><span class="line">     &#125;);</span><br><span class="line">     <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">       <span class="keyword">yield</span> put(&#123;</span><br><span class="line">         type: WP_POSTS.LIST.FAILED,</span><br><span class="line">         payload: response.error.response.data.msg,</span><br><span class="line">       &#125;);</span><br><span class="line">       <span class="keyword">return</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">yield</span> put(&#123;</span><br><span class="line">       type: WP_POSTS.LIST.SUCCESS,</span><br><span class="line">       payload: &#123;</span><br><span class="line">         posts: response.data,</span><br><span class="line">         total: response.headers[<span class="string">'x-wp-total'</span>],</span><br><span class="line">         query: action.payload.query,</span><br><span class="line">       &#125;,</span><br><span class="line">       view: action.view,</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">     <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: WP_POSTS.LIST.FAILED, <span class="attr">payload</span>: e.message &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>它监听类型为 WP_POSTS.LIST 的操作，然后从API获取数据。它分派另一个动作 WP_POSTS.LIST.SUCCESS，然后更新博客 reducer。</p>
+<h2 id="Reducer-Injections"><a href="#Reducer-Injections" class="headerlink" title="Reducer Injections"></a>Reducer Injections</h2><p>对于一个大型的应用程序，预先规划每一个模型是不可能的，而且随着应用程序的迭代开发，这种技术节省了大量的工时，并且允许开发人员添加新的 reducer，而无需重新连接整个 store。</p>
+<p>有一些<a href="https://github.com/ioof-holdings/redux-dynostore" target="_blank" rel="noopener">库</a>可以让您立即完成这项工作，但是我更喜欢这种方法，因为您可以灵活地将它与旧代码集成在一起，而不需要太多的重新连接。</p>
+<p>这是一种代码分割的形式，社区正在积极采用它。我将使用这个<a href="https://gist.github.com/amnox/5471f7e4c79546af3d50218db21e816a" target="_blank" rel="noopener">代码片段</a>作为一个例子来展示 reducer 注入器的外观及其工作原理。让我们先看看它是如何与 redux 集成的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> withConnect = connect(</span><br><span class="line"> mapStateToProps,</span><br><span class="line"> mapDispatchToProps,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> withReducer = injectReducer(&#123;</span><br><span class="line"> key: BLOG_VIEW,</span><br><span class="line"> reducer: blogReducer,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogPage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> compose(</span><br><span class="line"> withReducer,</span><br><span class="line"> withConnect,</span><br><span class="line">)(BlogPage);</span><br></pre></td></tr></table></figure>
+<p>上面的代码是 BlogPage.js 的一部分，它是我们应用程序的组件。</p>
+<p>这里我们导出的不是 connect 而是 compose，这是 redux 库中的另一个函数，它所做的是，它允许您传递多个函数，这些函数可以从左到右读取，也可以从下到上读取。</p>
+<blockquote>
+<p><em>All compose does is let you write deeply nested function transformations without the rightward drift of the code. Don’t give it too much credit!<br>(From Redux Documentation)</em></p>
+</blockquote>
+<p>最左边的函数可以接收多个参数，但是在那之后只有一个参数传递给函数。最终，将使用最右边函数的签名。这就是我们将 withConnect 作为最后一个参数传递的原因，这样组合就可以像 connect 一样使用。</p>
+<h2 id="路由和-Redux"><a href="#路由和-Redux" class="headerlink" title="路由和 Redux"></a>路由和 Redux</h2><p>开发者们喜欢在应用程序中使用一系列工具来处理路由，但在本节中，我将坚持使用 <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">react router dom</a> 并扩展它的功能，以使用redux。</p>
+<p>使用 react router 最常见的方法是用 BrowserRouter 标签包装根组件，用 <code>withRouter()</code> 方法包装子容器并导出它们 [<a href="https://github.com/amnox/manage-subscribers/blob/master/frontend/manage-subs-app/src/pages/HomePage.js" target="_blank" rel="noopener">示例</a>]。</p>
+<p>通过这种方式，子组件接收一个 <strong>history prop</strong>，该属性具有特定于用户会话的某些属性以及一些可用于控制导航的方法。</p>
+<p>由于没有 history 对象的中心视图，以这种方式实现可能会在大型应用程序中引起问题。此外，未通过 route 组件呈现的组件无法访问它：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Route path=<span class="string">"/"</span> exact component=&#123;HomePage&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>为了克服这个问题，我们将使用 <a href="https://github.com/supasate/connected-react-router" target="_blank" rel="noopener">connected react router</a> 库，它允许您通过 dispatch 方法轻松地使用路由。集成这一点需要做一些修改，即创建一个专门针对路由的新 reducer（明显）并添加一个新的中间件。</p>
+<p>初始设置后，可以通过 redux 使用它，应用内导航可以简单地通过 dispatching 操作来完成。</p>
+<p>要在组件中使用 connected react router，我们可以根据您的路由需求简单地将 dispatch 方法映射到 store。下面是一个片段，展示了 connected react router 的用法(需要确保初始设置已经完成)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; push &#125; <span class="keyword">from</span> <span class="string">'connected-react-router'</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function"><span class="params">dispatch</span> =&gt;</span> (&#123;</span><br><span class="line">  goTo: <span class="function"><span class="params">payload</span> =&gt;</span> &#123;</span><br><span class="line">    dispatch(push(payload.path));</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Child </span><br><span class="line">        onClick=&#123;</span><br><span class="line">          () =&gt; &#123;</span><br><span class="line">            <span class="keyword">this</span>.props.goTo(&#123; <span class="attr">path</span>: <span class="string">`/gallery/`</span>&#125;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>在上面的代码示例中，<code>goTo</code> 方法中的 dispatches 操作在浏览器的历史堆栈中推送您想要的 URL。由于 <code>goTo</code> 方法已被映射到 store，所以它被传递给 DemoComponent 一个属性。</p>
+<h1 id="Dynamic-UI-at-scale"><a href="#Dynamic-UI-at-scale" class="headerlink" title="Dynamic UI at scale"></a>Dynamic UI at scale</h1><p>有时，尽管有足够的后端和核心 SPA 逻辑，但由于组件的实现过于粗糙，用户界面的某些元素最终会损害整个用户体验，这些组件在表面上看起来非常基础。在本节中，我将讨论实现某些小部件的最佳实践，这些小部件会随着应用程序的扩展而变得棘手。</p>
+<h2 id="Soft-Loading-and-Suspense"><a href="#Soft-Loading-and-Suspense" class="headerlink" title="Soft Loading and Suspense"></a>Soft Loading and Suspense</h2><p>关于 javascript 的异步特性，最好的一点是您可以充分利用浏览器的潜力。不必等待进程完成后再排队等待新进程，这确实是一件好事。然而，作为开发人员，我们无法控制网络和在网络上加载的资源。</p>
+<p>一般来说，网络层被认为是不可靠和容易出错的，无论您的单页应用程序通过多少次质量检查，都有一些东西是我们无法控制的，比如连接性、响应时间等。</p>
+<p>但软件开发人员抛开“那不是我该做的”这一想法，开发了优雅的解决方案来处理这类问题。</p>
+<p>在<a href="https://buttercms.com/blog/front-end-developer-best-practices-to-design-react-ui-framework" target="_blank" rel="noopener">前端应用</a>的某些部分，你会想要显示一些 fallback 内容(一些比你试图加载的内容更轻量的组件)，这样用户就不会看到加载后的延时抖动，或者更糟，这个标志:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b569e45e21eeb0?w=29&amp;h=33&amp;f=png&amp;s=1062" alt=""><br>裂图</p>
+<p>React suspense 让你做到这一点，可以在加载内容时显示某种类型的加载效果。虽然这可以通过将 <code>isLoaded</code> 属性更改为 true 来实现效果，但是使用 suspense 更加简洁。</p>
+<p>在<a href="https://www.youtube.com/watch?v=SCQgE4mTnjU&amp;feature=youtu.be" target="_blank" rel="noopener">这里</a>了解更多关于如何使用它的信息，在这段视频中，Jared Palmer 介绍了实际应用中的 React suspense 及其一些功能。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b56a35fcf404ea?w=480&amp;h=480&amp;f=gif&amp;s=65955" alt=""></p>
+<p>没有使用 Suspense 的效果展示</p>
+<p>在组件中添加 suspense 要比在全局状态中管理 <code>isLoaded</code> 对象容易得多。我们首先用 React.StrictMode 包装父容器，确保应用程序中使用的任何 React 模块都不被弃用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;React.Suspense fallback=&#123;&lt;Spinner size=<span class="string">"large"</span> /&gt;&#125;&gt;</span><br><span class="line">  &lt;ArtistDetails id=&#123;<span class="keyword">this</span>.props.id&#125;/&gt;</span><br><span class="line">  &lt;ArtistTopTracks /&gt;</span><br><span class="line">  &lt;ArtistAlbums id=&#123;<span class="keyword">this</span>.props.id&#125;/&gt;</span><br><span class="line">&lt;<span class="regexp">/React.Suspense&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在加载主要内容时，包装在 <code>React.Suspense</code> 标记中的组件将加载其 fallback 属性中指定的组件，确保 fallback 属性中的组件是轻量的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b56aef1bb64c52?w=480&amp;h=480&amp;f=gif&amp;s=246225" alt=""></p>
+<p>使用 Suspense 的效果展示</p>
+<h2 id="自适应组件"><a href="#自适应组件" class="headerlink" title="自适应组件"></a>自适应组件</h2><p>在一个大型前端应用程序中，重复的模式开始出现，即使它们可能不像开始时那么明显。你不禁觉得自己以前干过这种事。</p>
+<p>例如，在您正在构建的应用程序中有两种模型：赛道和汽车。汽车列表页面有正方形的平铺块，每个平铺块上都有一个图像和一些描述。</p>
+<p>然而，赛道列表页面有一个图像和描述，以及一个小框，表明赛道是否提供服务。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/14/16b56b66decbd2c3?w=744&amp;h=429&amp;f=png&amp;s=14600" alt=""></p>
+<p>上面的两个组件在样式（背景颜色）上有一点不同，而赛道有额外的信息。在这个例子中只有两个模型，而在大型应用程序中，会有很多组件，为每个组件创建单独的组件是违反直觉的。</p>
+<p>通过创建了解它们加载的上下文的自适应组件,您可以避免重写类似的代码。考虑应用程序的搜索栏。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b56ba57bf39c94?w=362&amp;h=44&amp;f=png&amp;s=2633" alt=""></p>
+<p>它将在你的应用程序的多个页面上使用，功能和外观略有不同。例如，它在主页上会稍大一些，要处理这个问题，您可以创建一个单独的组件，它将根据传递给它的属性进行渲染。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">  open: PropTypes.bool.isRequired,</span><br><span class="line">  setOpen: PropTypes.func.isRequired,</span><br><span class="line">  goTo: PropTypes.func.isRequired,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用此方法，还可以在这些组件中切换 HTML 类，控制它们的外观。</p>
+<p>可以使用自适应组件的另一个好例子是分页助手，几乎每一页的应用程序都有它，或多或少是相同的。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/6/15/16b56bd94da10d53?w=502&amp;h=107&amp;f=png&amp;s=11563" alt=""></p>
+<p>如果您的 API 遵循恒定的设计模式，那么您需要传递给自适应分页组件的唯一属性是 URL 和每个页面的项。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>多年来，React 生态系统已经成熟，以至于几乎没有必要在开发的任何阶段重新造轮子。虽然非常有用，但导致了更多的复杂性为您的项目在选择什么是正确的。</p>
+<p>每个项目在规模和功能方面都是不同的。没有单一的方法或概括可以每次都有效，因此，在实际编码开始之前制定一个规划是必要的。</p>
+<p>在这样做的时候，很容易就能识别出哪些工具适合您，哪些工具是多余的。一个只有 2-3 个页面和极少 API 调用的应用程序不需要像上面讨论的那样复杂的数据存储。我想说的是，小型项目不需要使用 redux。</p>
+<p>当我们提前规划分析并绘制出应用程序中将要出现的组件时，我们可以看到页面之间有很多重复部分，只需重用代码或编写灵活的组件就可以节省大量开发成本。</p>
+<p>最后，我想说的是，数据是每个软件项目的支柱，这对于 React 应用程序也是如此。随着应用程序的迭代开发，数据量和与之相关的操作很容易让程序员应接不暇。预先确定关注点如数据存储、reducers actions、sagas等，可以证明是一个巨大的优势，并使编写它们变得更加有趣。</p>
+<p>如果您认为在创建大型 React 应用程序时，还有其他库或方法可以证明是有用的，请在评论中告诉我们。希望你喜欢这篇文章，谢谢你的阅读。</p>
+<blockquote>
+<p>文章中部分<strong>标题</strong>没有进行翻译，本人暂时还想不到如何翻译比较好，如果有不错的建议，欢迎评论区告知我，本文有其他翻译不合理的地方，也可以在评论区告知，感激。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/16/iPad-10.0.2-版本在 WKWebview 出现的键盘问题/" rel="next" title="iPad 10.0.2 版本在 WKWebview 出现的键盘问题">
+                <i class="fa fa-chevron-left"></i> iPad 10.0.2 版本在 WKWebview 出现的键盘问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Lcina</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Start-on-the-board-从草图开始"><span class="nav-number">1.</span> <span class="nav-text">Start on the board [从草图开始]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用规划阶段-为什么这样做？"><span class="nav-number">1.1.</span> <span class="nav-text">应用规划阶段 - 为什么这样做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1-视图和组件"><span class="nav-number">1.2.</span> <span class="nav-text">Step 1: 视图和组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-应用程序内的动作和事件"><span class="nav-number">1.3.</span> <span class="nav-text">Step 2: 应用程序内的动作和事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3-数据和模型"><span class="nav-number">1.4.</span> <span class="nav-text">Step 3: 数据和模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Actions-Datasource-and-API"><span class="nav-number">2.</span> <span class="nav-text">Actions, Datasource and API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API-设计和客户端应用程序"><span class="nav-number">2.1.</span> <span class="nav-text">API 设计和客户端应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Datasource-design-patterns"><span class="nav-number">2.2.</span> <span class="nav-text">Datasource design patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Courier"><span class="nav-number">2.2.1.</span> <span class="nav-text">Without Courier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#With-Courier"><span class="nav-number">2.2.2.</span> <span class="nav-text">With Courier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-调用和应用程序内操作"><span class="nav-number">2.3.</span> <span class="nav-text">API 调用和应用程序内操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redux-集成"><span class="nav-number">3.</span> <span class="nav-text">Redux 集成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管理应用程序的不纯方面"><span class="nav-number">3.1.</span> <span class="nav-text">管理应用程序的不纯方面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reducer-Injections"><span class="nav-number">3.2.</span> <span class="nav-text">Reducer Injections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由和-Redux"><span class="nav-number">3.3.</span> <span class="nav-text">路由和 Redux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-UI-at-scale"><span class="nav-number">4.</span> <span class="nav-text">Dynamic UI at scale</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Soft-Loading-and-Suspense"><span class="nav-number">4.1.</span> <span class="nav-text">Soft Loading and Suspense</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自适应组件"><span class="nav-number">4.2.</span> <span class="nav-text">自适应组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lcina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("8Cgz2ufsVnbtprMNRJQXoCT2-gzGzoHsz", "F3rba0mUEIw7dY8SeLRzd9Vq");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
